@@ -24,12 +24,20 @@ contract TimewalkToken is owned{
     /* This creates an array with all balances */
     mapping (address => uint256) public balanceOf;
 
+    // Public variables of the token
+    string public name;
+    string public symbol;
+    uint8 public decimals = 0;
+    // 18 decimals is the strongly suggested default, avoid changing it
+
     uint256 public totalSupply;
 
 
     /* Initializes contract with initial supply tokens to the creator of the contract */
     function TimewalkToken(
         uint256 initialSupply,
+        string tokenName,
+        string tokenSymbol,
         address centralMinter
         ) public {
         if(centralMinter != 0)
@@ -37,6 +45,8 @@ contract TimewalkToken is owned{
 
         totalSupply = initialSupply;
         balanceOf[msg.sender] = initialSupply;              // Give the creator all initial tokens
+        name = tokenName;                                   // Set the name for display purposes
+        symbol = tokenSymbol;                               // Set the symbol for display purposes
     }
 
 
