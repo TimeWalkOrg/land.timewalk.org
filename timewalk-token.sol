@@ -49,6 +49,9 @@ contract TimewalkToken is owned{
         symbol = tokenSymbol;                               // Set the symbol for display purposes
     }
 
+    // fallback function to accept ether
+    function () payable public {}
+
 
     uint minBalanceForAccounts;
 
@@ -57,12 +60,13 @@ contract TimewalkToken is owned{
     }
 
 
+    // expressed in wei
     uint256 public sellPrice;
     uint256 public buyPrice;
 
-    function setPrices(uint256 newSellPrice, uint256 newBuyPrice) onlyOwner public {
-        sellPrice = newSellPrice;
-        buyPrice = newBuyPrice;
+    function setPrices(uint256 newSellPriceInFinney, uint256 newBuyPriceInFinney) onlyOwner public {
+        sellPrice = newSellPriceInFinney * 1 finney;
+        buyPrice = newBuyPriceInFinney * 1 finney;
     }
 
 
@@ -106,7 +110,10 @@ contract TimewalkToken is owned{
     }
 
 
-    function buy() payable public returns (uint amount){
+    function buy() payable public returns (uint amount) {
+        // msg.value is amount of wei sent with message
+        // http://solidity.readthedocs.io/en/develop/units-and-global-variables.html?highlight=balance#block-and-transaction-properties
+
         amount = msg.value / buyPrice;                    // calculates the amount
         require(balanceOf[this] >= amount);               // checks if it has enough to sell
         balanceOf[msg.sender] += amount;                  // adds the amount to buyer's balance
@@ -121,6 +128,10 @@ contract TimewalkToken is owned{
         balanceOf[this] += amount;                        // adds the amount to owner's balance
         balanceOf[msg.sender] -= amount;                  // subtracts the amount from seller's balance
         revenue = amount * sellPrice;
+
+        // .send() is expressed in wei
+        // http://solidity.readthedocs.io/en/develop/units-and-global-variables.html#address-related
+
         require(msg.sender.send(revenue));                // sends ether to the seller: it's important to do this last to prevent recursion attacks
         Transfer(msg.sender, this, amount);               // executes an event reflecting on the change
         return revenue;
