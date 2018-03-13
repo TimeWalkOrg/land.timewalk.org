@@ -1,6 +1,6 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.17;
 
-import 'erc821/build/contracts/StandardAssetRegistry.sol';
+import 'erc821/contracts/FullAssetRegistry.sol';
 
 
 contract owned {
@@ -21,7 +21,7 @@ contract owned {
 }
 
 
-contract TimewalkLand is owned,StandardAssetRegistry {
+contract TimewalkLand is owned, FullAssetRegistry {
 
   function TimewalkLand() public {
     _name = "TimewalkLand";
@@ -47,7 +47,7 @@ contract TimewalkLand is owned,StandardAssetRegistry {
 
     uint256 assetId = uint256(keccak256(placeId));
 
-    _generate(assetId, msg.sender, placeId);
+    _generate(assetId, msg.sender);
 
     placeIdLookup[assetId] = placeId;
   }
