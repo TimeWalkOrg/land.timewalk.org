@@ -26,7 +26,7 @@ contract TimewalkLand is owned, FullAssetRegistry {
   function TimewalkLand() public {
     _name = "TimewalkLand";
     _symbol = "TWL";
-    _description = "First test of timewalk land tokens";
+    _description = "Timewalk Land Tokens";
     owner = msg.sender;
   }
 

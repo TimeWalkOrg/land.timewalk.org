@@ -13,6 +13,7 @@
     "ethereumjs-tx": "^1.3.4",
     "express": "^4.16.3",
     "helmet": "^3.12.0",
+    "node-fetch": "^2.1.1",
     "solc": "^0.4.21",
     "truffle-flattener": "^1.2.5",
     "truffle-hdwallet-provider": "0.0.3",
