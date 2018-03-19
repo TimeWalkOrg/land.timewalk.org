@@ -5,7 +5,7 @@ Deployment process:
 * ensure `ETHEREUM_ACCOUNT_MNEMONIC` and `ETHEREUM_INFURA_ACCESS_TOKEN` are set in `.env`
 
 ```bash
-λ truffle compile
+λ npm run compile
 
 
 λ npm run deploy
