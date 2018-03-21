@@ -63,7 +63,7 @@
           if (available) {
             el.innerHTML = `<strong>${result.plus_code.best_street_address}</strong> in <strong>${_time}</strong> is available.`
             // register a token
-            registerBtn.addEventListener('click', async function(ev) {
+            registerBtn.addEventListener('click', function(ev) {
               window.contractInstance.claim(_placeId, _time, { from: addr, value: priceInWei }, (err, res) => {
                 if(!err)
                   console.log(res)
