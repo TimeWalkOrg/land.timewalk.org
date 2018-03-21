@@ -3,10 +3,10 @@ pragma solidity ^0.4.17;
 import 'erc821/contracts/FullAssetRegistry.sol';
 
 
-contract owned {
+contract Owned {
   address public owner;
 
-  function owned() public {
+  function Owned() public {
     owner = msg.sender;
   }
 
@@ -21,35 +21,49 @@ contract owned {
 }
 
 
-contract TimewalkLand is owned, FullAssetRegistry {
+contract TimewalkLand is Owned, FullAssetRegistry {
 
   function TimewalkLand() public {
     _name = "TimewalkLand";
     _symbol = "TWL";
-    _description = "Timewalk Land Tokens";
-    owner = msg.sender;
+    _description = "First test of timewalk land tokens";
   }
 
   // map assetId to placeId
-  mapping(uint256 => string) placeIdLookup;
+  mapping(uint256 => string) public placeIdLookup;
 
   // expressed in wei
-  uint256 public sellPrice;
-  uint256 public buyPrice;
+  uint256 public price;
 
-  function setPrices(uint256 newSellPriceInFinney, uint256 newBuyPriceInFinney) onlyOwner public {
-    sellPrice = newSellPriceInFinney * 1 finney;
-    buyPrice = newBuyPriceInFinney * 1 finney;
+  function setPrices(uint256 _newPriceInFinneey) onlyOwner public {
+    price = _newPriceInFinneey * 1 finney;
   }
 
-  function claim(string placeId) payable public {
-    require(msg.value >= buyPrice);
+  // check if the assetId is already taken
+  function claim(string _placeId, uint256 _year) payable public {
+    require(msg.value >= price);
 
-    uint256 assetId = uint256(keccak256(placeId));
+    uint256 assetId = uint256(keccak256(_placeId, _year));
 
-    _generate(assetId, msg.sender);
+    if (bytes(placeIdLookup[assetId]).length == 0) {
+      _generate(assetId, msg.sender);
 
-    placeIdLookup[assetId] = placeId;
+      placeIdLookup[assetId] = _placeId;
+    }
+  }
+
+  function placeAvailable(string _placeId, uint256 _year) public view returns(bool) {
+    uint256 assetId = uint256(keccak256(_placeId, _year));
+
+    if (bytes(placeIdLookup[assetId]).length == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function withdraw() onlyOwner public {
+    msg.sender.transfer(this.balance);
   }
 
 }

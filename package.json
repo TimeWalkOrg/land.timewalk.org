@@ -13,10 +13,13 @@
     "ethereumjs-tx": "^1.3.4",
     "express": "^4.16.3",
     "helmet": "^3.12.0",
-    "node-fetch": "^2.1.1",
+    "install": "^0.10.4",
+    "mustache-express": "^1.2.5",
+    "npm": "^5.7.1",
     "solc": "^0.4.21",
     "truffle-flattener": "^1.2.5",
     "truffle-hdwallet-provider": "0.0.3",
+    "truffle-hdwallet-provider-privkey": "^0.1.0",
     "web3": "^1.0.0-beta2"
   },
   "scripts": {

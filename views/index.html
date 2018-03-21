@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title class = "titleText">TimeWalk Land Tokens</title>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@0.20.3/dist/web3.min.js"></script>
+
+  <style>
+    * {
+      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+      text-rendering: optimizeLegibility;
+    }
+  </style>
+</head>
+<body>
+  <div style="display: grid; grid-template-columns: 1fr 60px 90px; grid-template-rows: 40px 1fr; grid-gap: 10px">
+    <input id="place" type="text" placeholder="e.g., 428 Howe st. Oakland, CA" required/>
+    <input id="year" type="text" placeholder="1984" required/>
+    <button id="search">Search</button>
+    <div id="result"></div>
+    <button id="register" style="grid-column: 2 / span 2; height: 40px" disabled>Claim</button>
+  </div>
+
+  <script>
+    'use strict'
+
+    const abi = {{{abi}}}
+    const contractAddress = '{{{contractAddress}}}'
+    const priceInWei = {{{priceInWei}}}
+
+    const searchBtn = document.querySelector('#search')
+    const registerBtn = document.querySelector('#register')
+
+    window.addEventListener('load', function() {
+      window.web3 = new Web3(web3.currentProvider)
+
+      window.contractInstance = window.web3.eth.contract(abi).at(contractAddress)
+
+      searchBtn.addEventListener('click', async function(ev) {
+        ev.preventDefault()
+        searchBtn.setAttribute('disabled', true)
+
+        const input = document.querySelector('#place')
+        let result = await fetch('/code?address=' + encodeURIComponent(input.value))
+        result = await result.json()
+        searchBtn.removeAttribute('disabled')
+
+        if (result != null) {
+          const yearInput = document.querySelector('#year')
+
+          console.log('result', result)
+          // Parameters for the function in the smart contract
+          const _placeId = result.plus_code.global_code
+          const _time = yearInput.value
+
+          const addr = window.web3.eth.accounts[0]
+
+          // check if the place is available
+          const available = await isPlaceAvailable(_placeId, _time)
+
+          const el = document.getElementById('result')
+
+          if (available) {
+            el.innerHTML = `<strong>${result.plus_code.best_street_address}</strong> in <strong>${_time}</strong> is available.`
+            // register a token
+            registerBtn.addEventListener('click', async function(ev) {
+              window.contractInstance.claim(_placeId, _time, { from: addr, value: priceInWei }, (err, res) => {
+                if(!err)
+                  console.log(res)
+              })
+            })
+            registerBtn.removeAttribute('disabled')
+          } else {
+            el.innerHTML = `<strong>${result.plus_code.best_street_address}</strong> in <strong>${_time}</strong> is already taken.`
+          }
+        }
+
+      })
+    })
+
+
+    async function isPlaceAvailable(_placeId, _time)  {
+      return new Promise(function(resolve, reject) {
+        window.contractInstance.placeAvailable(_placeId, _time, function(err, available) {
+          if(err)
+            return reject(err)
+          resolve(available)
+        })
+      })
+    }
+
+  </script>
+</body>
+</html>
