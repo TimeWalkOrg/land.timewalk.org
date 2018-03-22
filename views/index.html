@@ -41,7 +41,7 @@
     }
 
     h2 {
-      max-width: 400px;
+      max-width: 600px;
       margin: 0px auto;
       padding: 8px;
     }
@@ -55,10 +55,12 @@
 </head>
 <body>
   <h2>Buy Token</h2>
-  <div style="display: grid; grid-template-columns: 1fr 60px 90px; grid-template-rows: 40px 1fr; grid-gap: 10px; max-width: 400px; margin: 0px auto;">
-    <input id="place" type="text" placeholder="e.g., 428 Howe st. Oakland, CA" required/>
-    <input id="year" type="text" placeholder="year" required/>
-    <button id="search">Search</button>
+  <div style="display: grid; grid-template-columns: 1fr; grid-template-rows: 40px 1fr; grid-gap: 10px; max-width: 600px; margin: 0px auto;">
+    <form style="display: grid; grid-template-columns: 1fr 60px 90px; grid-column: 1 / span 3; grid-gap: 10px">
+      <input id="place" type="text" placeholder="e.g., 428 Howe st. Oakland, CA" required/>
+      <input id="year" type="text" placeholder="year" required/>
+      <button id="search">Search</button>
+    </form>
     <div id="result" style="padding: 8px; min-height: 80px"></div>
     <button id="register" style="grid-column: 2 / span 2; height: 40px; display:none">Claim</button>
 
@@ -66,7 +68,7 @@
   </div>
 
   <h2>Your Tokens</h2>
-  <div id="tokensForOwner" style="max-width: 400px; margin: 0px auto; color: #888">No tokens yet.</div>
+  <div id="tokensForOwner" style="max-width: 600px; margin: 0px auto; color: #888">No tokens yet.</div>
 
   <script>
     'use strict'
@@ -103,7 +105,8 @@
         li.innerHTML = `${result.plus_code.best_street_address}  [${parts[1]}]`
       });
 
-      searchBtn.addEventListener('click', async function(ev) {
+
+      document.querySelector('form').addEventListener('submit', async function(ev) {
         ev.preventDefault()
         searchBtn.setAttribute('disabled', true)
 

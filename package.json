@@ -20,7 +20,7 @@
     "truffle-flattener": "^1.2.5",
     "truffle-hdwallet-provider": "0.0.3",
     "truffle-hdwallet-provider-privkey": "^0.1.0",
-    "web3": "^1.0.0-beta2"
+    "web3": "^1.0.0-beta.33"
   },
   "scripts": {
     "contract-compile": "truffle compile",
