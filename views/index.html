@@ -10,16 +10,58 @@
       font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
       text-rendering: optimizeLegibility;
     }
+
+    body {
+      padding: 40px;
+    }
+
+    input[type="text"] {
+      background: #f9f9ff;
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+
+    input:focus {
+      outline: none;
+      border: 1px solid #bababa;
+    }
+
+    button {
+      background: lavender;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:focus {
+      outline: none;
+    }
+
+    button:hover {
+      background: lightsteelblue;
+    }
+
+    h2 {
+      max-width: 400px;
+      margin: 0px auto;
+      padding: 8px;
+    }
+
   </style>
 </head>
 <body>
-  <div style="display: grid; grid-template-columns: 1fr 60px 90px; grid-template-rows: 40px 1fr; grid-gap: 10px">
+  <h2>Buy Token</h2>
+  <div style="display: grid; grid-template-columns: 1fr 60px 90px; grid-template-rows: 40px 1fr; grid-gap: 10px; max-width: 400px; margin: 0px auto;">
     <input id="place" type="text" placeholder="e.g., 428 Howe st. Oakland, CA" required/>
-    <input id="year" type="text" placeholder="1984" required/>
+    <input id="year" type="text" placeholder="year" required/>
     <button id="search">Search</button>
-    <div id="result"></div>
-    <button id="register" style="grid-column: 2 / span 2; height: 40px" disabled>Claim</button>
+    <div id="result" style="padding: 8px; min-height: 80px"></div>
+    <button id="register" style="grid-column: 2 / span 2; height: 40px; display:none">Claim</button>
+
+
   </div>
+
+  <h2>Your Tokens</h2>
+  <div id="tokensForOwner" style="max-width: 400px; margin: 0px auto; color: #ddd; padding-left: 8px">No tokens yet.</div>
 
   <script>
     'use strict'
@@ -31,10 +73,22 @@
     const searchBtn = document.querySelector('#search')
     const registerBtn = document.querySelector('#register')
 
-    window.addEventListener('load', function() {
+    window.addEventListener('load', async () => {
       window.web3 = new Web3(web3.currentProvider)
 
       window.contractInstance = window.web3.eth.contract(abi).at(contractAddress)
+
+      let tokenIds = await listTokensForOwner(window.web3.eth.accounts[0])
+
+      const ul = document.createElement('ul')
+      document.getElementById('tokensForOwner').appendChild(ul)
+
+      tokenIds.forEach(async (tokenId) => {
+        const metadata = await getMetaData(tokenId)
+        const li = document.createElement('li')
+        ul.appendChild(li)
+        li.innerHTML = metadata
+      });
 
       searchBtn.addEventListener('click', async function(ev) {
         ev.preventDefault()
@@ -45,46 +99,75 @@
         result = await result.json()
         searchBtn.removeAttribute('disabled')
 
-        if (result != null) {
-          const yearInput = document.querySelector('#year')
+        if (!result)
+          return
 
-          console.log('result', result)
-          // Parameters for the function in the smart contract
-          const _placeId = result.plus_code.global_code
-          const _time = yearInput.value
+        const yearInput = document.querySelector('#year')
 
-          const addr = window.web3.eth.accounts[0]
+        // Parameters for the function in the smart contract
+        const _placeId = result.plus_code.global_code
+        const _time = yearInput.value
 
-          // check if the place is available
-          const available = await isPlaceAvailable(_placeId, _time)
+        const addr = window.web3.eth.accounts[0]
 
-          const el = document.getElementById('result')
+        console.log('t:', _placeId, _time)
 
-          if (available) {
-            el.innerHTML = `<strong>${result.plus_code.best_street_address}</strong> in <strong>${_time}</strong> is available.`
-            // register a token
-            registerBtn.addEventListener('click', function(ev) {
-              window.contractInstance.claim(_placeId, _time, { from: addr, value: priceInWei }, (err, res) => {
-                if(!err)
-                  console.log(res)
-              })
+
+        // check if the place is available
+        const available = await isPlaceAvailable(_placeId, _time)
+
+        const el = document.getElementById('result')
+
+        if (available) {
+          //registerBtn.removeAttribute('disabled')
+          registerBtn.style.display = ''
+
+          el.innerHTML = `<strong>${result.plus_code.best_street_address}</strong> in <strong>${_time}</strong> is available.`
+          // register a token
+          registerBtn.addEventListener('click', function(ev) {
+            window.contractInstance.claim(_placeId + " " + _time, { from: addr, value: priceInWei }, (err, res) => {
+              if(!err)
+                console.log('claim result', res)
             })
-            registerBtn.removeAttribute('disabled')
-          } else {
-            el.innerHTML = `<strong>${result.plus_code.best_street_address}</strong> in <strong>${_time}</strong> is already taken.`
-          }
+          })
+
+        } else {
+          el.innerHTML = `<strong>${result.plus_code.best_street_address}</strong> in <strong>${_time}</strong> is already taken.`
         }
 
       })
     })
 
-
     async function isPlaceAvailable(_placeId, _time)  {
       return new Promise(function(resolve, reject) {
-        window.contractInstance.placeAvailable(_placeId, _time, function(err, available) {
+        window.contractInstance.placeAvailable(_placeId + " " + _time, function(err, available) {
           if(err)
             return reject(err)
           resolve(available)
+        })
+      })
+    }
+
+    async function listTokensForOwner() {
+      return new Promise((resolve, reject) => {
+        window.contractInstance.tokensOf(window.web3.eth.accounts[0], (err, tokenIds) => {
+          if(err)
+            return reject(err)
+
+          // this are really large numbers we need to parse them as string so we can use them
+          tokenIds = tokenIds.map(t => t.toString(10))
+          resolve(tokenIds);
+        })
+      })
+    }
+
+    async function getMetaData(tokenId) {
+      return new Promise((resolve , rejecet) => {
+        window.contractInstance.tokenMetadata(tokenId, (err, metadata) => {
+          if(err)
+            reject(err)
+
+          resolve(metadata)
         })
       })
     }

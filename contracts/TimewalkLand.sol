@@ -40,20 +40,22 @@ contract TimewalkLand is Owned, FullAssetRegistry {
   }
 
   // check if the assetId is already taken
-  function claim(string _placeId, uint256 _year) payable public {
+  function claim(string _placeData) payable public {
     require(msg.value >= price);
 
-    uint256 assetId = uint256(keccak256(_placeId, _year));
+    uint256 assetId = uint256(keccak256(_placeData));
 
     if (bytes(placeIdLookup[assetId]).length == 0) {
       _generate(assetId, msg.sender);
 
-      placeIdLookup[assetId] = _placeId;
+      placeIdLookup[assetId] = _placeData;
+
+      _update(assetId, _placeData);
     }
   }
 
-  function placeAvailable(string _placeId, uint256 _year) public view returns(bool) {
-    uint256 assetId = uint256(keccak256(_placeId, _year));
+  function placeAvailable(string _placeData) public view returns(bool) {
+    uint256 assetId = uint256(keccak256(_placeData));
 
     if (bytes(placeIdLookup[assetId]).length == 0) {
       return true;
