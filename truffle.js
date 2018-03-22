@@ -1,8 +1,8 @@
 'use strict'
 
 const dotenv           = require('dotenv').config()
-const HDWalletProvider = require('truffle-hdwallet-provider-privkey')
-
+//const HDWalletProvider = require('truffle-hdwallet-provider-privkey')
+const HDWalletProvider = require('truffle-hdwallet-provider')
 
 const mnemonic = process.env.ETHEREUM_ACCOUNT_MNEMONIC
 
