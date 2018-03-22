@@ -23,8 +23,9 @@
     "web3": "^1.0.0-beta2"
   },
   "scripts": {
-    "compile": "truffle compile",
-    "deploy": "truffle migrate --network rinkeby",
+    "contract-compile": "truffle compile",
+    "contract-deploy": "truffle migrate --network rinkeby",
+    "deploy": "now --dotenv .env && now alias $(pbpaste) land.timewalk.org",
     "start": "node index"
   },
   "repository": {
