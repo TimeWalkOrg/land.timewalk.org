@@ -23,6 +23,8 @@ contract Owned {
 
 contract TimewalkLand is Owned, FullAssetRegistry {
 
+  event Claimed(address _claimer, string _placeData, uint _assetId);
+
   function TimewalkLand() public {
     _name = "TimewalkLand";
     _symbol = "TWL";
@@ -51,6 +53,8 @@ contract TimewalkLand is Owned, FullAssetRegistry {
       placeIdLookup[assetId] = _placeData;
 
       _update(assetId, _placeData);
+
+      Claimed(msg.sender, _placeData, assetId);
     }
   }
 
