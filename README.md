@@ -1,4 +1,4 @@
-# ethereum-token-contract
+# land.timewalk.org
 Testing tokens as a mechanism for managing TimeWalk "property rights"
 
 Deployment process:
