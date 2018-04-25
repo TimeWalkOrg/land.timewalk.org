@@ -11,14 +11,14 @@
     "absolutePath": "erc821/contracts/AssetRegistryStorage.sol",
     "exportedSymbols": {
       "AssetRegistryStorage": [
-        656
+        654
       ]
     },
-    "id": 657,
+    "id": 655,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 620,
+        "id": 618,
         "literals": [
           "solidity",
           "^",
@@ -34,19 +34,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 656,
+        "id": 654,
         "linearizedBaseContracts": [
-          656
+          654
         ],
         "name": "AssetRegistryStorage",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 622,
+            "id": 620,
             "name": "_name",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "61:21:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -55,7 +55,7 @@
               "typeString": "string storage ref"
             },
             "typeName": {
-              "id": 621,
+              "id": 619,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "61:6:4",
@@ -69,10 +69,10 @@
           },
           {
             "constant": false,
-            "id": 624,
+            "id": 622,
             "name": "_symbol",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "86:23:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -81,7 +81,7 @@
               "typeString": "string storage ref"
             },
             "typeName": {
-              "id": 623,
+              "id": 621,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "86:6:4",
@@ -95,10 +95,10 @@
           },
           {
             "constant": false,
-            "id": 626,
+            "id": 624,
             "name": "_description",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "113:28:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -107,7 +107,7 @@
               "typeString": "string storage ref"
             },
             "typeName": {
-              "id": 625,
+              "id": 623,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "113:6:4",
@@ -121,10 +121,10 @@
           },
           {
             "constant": false,
-            "id": 628,
+            "id": 626,
             "name": "_count",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "221:23:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -133,7 +133,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 627,
+              "id": 625,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "221:7:4",
@@ -147,10 +147,10 @@
           },
           {
             "constant": false,
-            "id": 633,
+            "id": 631,
             "name": "_assetsOf",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "317:48:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -159,9 +159,9 @@
               "typeString": "mapping(address => uint256[] storage ref)"
             },
             "typeName": {
-              "id": 632,
+              "id": 630,
               "keyType": {
-                "id": 629,
+                "id": 627,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "325:7:4",
@@ -178,7 +178,7 @@
               },
               "valueType": {
                 "baseType": {
-                  "id": 630,
+                  "id": 628,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "336:7:4",
@@ -187,7 +187,7 @@
                     "typeString": "uint256"
                   }
                 },
-                "id": 631,
+                "id": 629,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "336:9:4",
@@ -202,10 +202,10 @@
           },
           {
             "constant": false,
-            "id": 637,
+            "id": 635,
             "name": "_holderOf",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "425:46:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -214,9 +214,9 @@
               "typeString": "mapping(uint256 => address)"
             },
             "typeName": {
-              "id": 636,
+              "id": 634,
               "keyType": {
-                "id": 634,
+                "id": 632,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "433:7:4",
@@ -232,7 +232,7 @@
                 "typeString": "mapping(uint256 => address)"
               },
               "valueType": {
-                "id": 635,
+                "id": 633,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "444:7:4",
@@ -247,10 +247,10 @@
           },
           {
             "constant": false,
-            "id": 641,
+            "id": 639,
             "name": "_indexOfAsset",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "561:50:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -259,9 +259,9 @@
               "typeString": "mapping(uint256 => uint256)"
             },
             "typeName": {
-              "id": 640,
+              "id": 638,
               "keyType": {
-                "id": 638,
+                "id": 636,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "569:7:4",
@@ -277,7 +277,7 @@
                 "typeString": "mapping(uint256 => uint256)"
               },
               "valueType": {
-                "id": 639,
+                "id": 637,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "580:7:4",
@@ -292,10 +292,10 @@
           },
           {
             "constant": false,
-            "id": 645,
+            "id": 643,
             "name": "_assetData",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "674:46:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -304,9 +304,9 @@
               "typeString": "mapping(uint256 => string storage ref)"
             },
             "typeName": {
-              "id": 644,
+              "id": 642,
               "keyType": {
-                "id": 642,
+                "id": 640,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "682:7:4",
@@ -322,7 +322,7 @@
                 "typeString": "mapping(uint256 => string storage ref)"
               },
               "valueType": {
-                "id": 643,
+                "id": 641,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
                 "src": "693:6:4",
@@ -337,10 +337,10 @@
           },
           {
             "constant": false,
-            "id": 651,
+            "id": 649,
             "name": "_operators",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "878:64:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -349,9 +349,9 @@
               "typeString": "mapping(address => mapping(address => bool))"
             },
             "typeName": {
-              "id": 650,
+              "id": 648,
               "keyType": {
-                "id": 646,
+                "id": 644,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "886:7:4",
@@ -367,9 +367,9 @@
                 "typeString": "mapping(address => mapping(address => bool))"
               },
               "valueType": {
-                "id": 649,
+                "id": 647,
                 "keyType": {
-                  "id": 647,
+                  "id": 645,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "905:7:4",
@@ -385,7 +385,7 @@
                   "typeString": "mapping(address => bool)"
                 },
                 "valueType": {
-                  "id": 648,
+                  "id": 646,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
                   "src": "916:4:4",
@@ -401,10 +401,10 @@
           },
           {
             "constant": false,
-            "id": 655,
+            "id": 653,
             "name": "_approval",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "979:46:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -413,9 +413,9 @@
               "typeString": "mapping(uint256 => address)"
             },
             "typeName": {
-              "id": 654,
+              "id": 652,
               "keyType": {
-                "id": 652,
+                "id": 650,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "987:7:4",
@@ -431,7 +431,7 @@
                 "typeString": "mapping(uint256 => address)"
               },
               "valueType": {
-                "id": 653,
+                "id": 651,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "998:7:4",
@@ -445,7 +445,7 @@
             "visibility": "internal"
           }
         ],
-        "scope": 657,
+        "scope": 655,
         "src": "26:1002:4"
       }
     ],
@@ -455,14 +455,14 @@
     "absolutePath": "erc821/contracts/AssetRegistryStorage.sol",
     "exportedSymbols": {
       "AssetRegistryStorage": [
-        656
+        654
       ]
     },
-    "id": 657,
+    "id": 655,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 620,
+        "id": 618,
         "literals": [
           "solidity",
           "^",
@@ -478,19 +478,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 656,
+        "id": 654,
         "linearizedBaseContracts": [
-          656
+          654
         ],
         "name": "AssetRegistryStorage",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 622,
+            "id": 620,
             "name": "_name",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "61:21:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -499,7 +499,7 @@
               "typeString": "string storage ref"
             },
             "typeName": {
-              "id": 621,
+              "id": 619,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "61:6:4",
@@ -513,10 +513,10 @@
           },
           {
             "constant": false,
-            "id": 624,
+            "id": 622,
             "name": "_symbol",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "86:23:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -525,7 +525,7 @@
               "typeString": "string storage ref"
             },
             "typeName": {
-              "id": 623,
+              "id": 621,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "86:6:4",
@@ -539,10 +539,10 @@
           },
           {
             "constant": false,
-            "id": 626,
+            "id": 624,
             "name": "_description",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "113:28:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -551,7 +551,7 @@
               "typeString": "string storage ref"
             },
             "typeName": {
-              "id": 625,
+              "id": 623,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "113:6:4",
@@ -565,10 +565,10 @@
           },
           {
             "constant": false,
-            "id": 628,
+            "id": 626,
             "name": "_count",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "221:23:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -577,7 +577,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 627,
+              "id": 625,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "221:7:4",
@@ -591,10 +591,10 @@
           },
           {
             "constant": false,
-            "id": 633,
+            "id": 631,
             "name": "_assetsOf",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "317:48:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -603,9 +603,9 @@
               "typeString": "mapping(address => uint256[] storage ref)"
             },
             "typeName": {
-              "id": 632,
+              "id": 630,
               "keyType": {
-                "id": 629,
+                "id": 627,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "325:7:4",
@@ -622,7 +622,7 @@
               },
               "valueType": {
                 "baseType": {
-                  "id": 630,
+                  "id": 628,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "336:7:4",
@@ -631,7 +631,7 @@
                     "typeString": "uint256"
                   }
                 },
-                "id": 631,
+                "id": 629,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "336:9:4",
@@ -646,10 +646,10 @@
           },
           {
             "constant": false,
-            "id": 637,
+            "id": 635,
             "name": "_holderOf",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "425:46:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -658,9 +658,9 @@
               "typeString": "mapping(uint256 => address)"
             },
             "typeName": {
-              "id": 636,
+              "id": 634,
               "keyType": {
-                "id": 634,
+                "id": 632,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "433:7:4",
@@ -676,7 +676,7 @@
                 "typeString": "mapping(uint256 => address)"
               },
               "valueType": {
-                "id": 635,
+                "id": 633,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "444:7:4",
@@ -691,10 +691,10 @@
           },
           {
             "constant": false,
-            "id": 641,
+            "id": 639,
             "name": "_indexOfAsset",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "561:50:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -703,9 +703,9 @@
               "typeString": "mapping(uint256 => uint256)"
             },
             "typeName": {
-              "id": 640,
+              "id": 638,
               "keyType": {
-                "id": 638,
+                "id": 636,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "569:7:4",
@@ -721,7 +721,7 @@
                 "typeString": "mapping(uint256 => uint256)"
               },
               "valueType": {
-                "id": 639,
+                "id": 637,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "580:7:4",
@@ -736,10 +736,10 @@
           },
           {
             "constant": false,
-            "id": 645,
+            "id": 643,
             "name": "_assetData",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "674:46:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -748,9 +748,9 @@
               "typeString": "mapping(uint256 => string storage ref)"
             },
             "typeName": {
-              "id": 644,
+              "id": 642,
               "keyType": {
-                "id": 642,
+                "id": 640,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "682:7:4",
@@ -766,7 +766,7 @@
                 "typeString": "mapping(uint256 => string storage ref)"
               },
               "valueType": {
-                "id": 643,
+                "id": 641,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
                 "src": "693:6:4",
@@ -781,10 +781,10 @@
           },
           {
             "constant": false,
-            "id": 651,
+            "id": 649,
             "name": "_operators",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "878:64:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -793,9 +793,9 @@
               "typeString": "mapping(address => mapping(address => bool))"
             },
             "typeName": {
-              "id": 650,
+              "id": 648,
               "keyType": {
-                "id": 646,
+                "id": 644,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "886:7:4",
@@ -811,9 +811,9 @@
                 "typeString": "mapping(address => mapping(address => bool))"
               },
               "valueType": {
-                "id": 649,
+                "id": 647,
                 "keyType": {
-                  "id": 647,
+                  "id": 645,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "905:7:4",
@@ -829,7 +829,7 @@
                   "typeString": "mapping(address => bool)"
                 },
                 "valueType": {
-                  "id": 648,
+                  "id": 646,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
                   "src": "916:4:4",
@@ -845,10 +845,10 @@
           },
           {
             "constant": false,
-            "id": 655,
+            "id": 653,
             "name": "_approval",
             "nodeType": "VariableDeclaration",
-            "scope": 656,
+            "scope": 654,
             "src": "979:46:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -857,9 +857,9 @@
               "typeString": "mapping(uint256 => address)"
             },
             "typeName": {
-              "id": 654,
+              "id": 652,
               "keyType": {
-                "id": 652,
+                "id": 650,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "987:7:4",
@@ -875,7 +875,7 @@
                 "typeString": "mapping(uint256 => address)"
               },
               "valueType": {
-                "id": 653,
+                "id": 651,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "998:7:4",
@@ -889,7 +889,7 @@
             "visibility": "internal"
           }
         ],
-        "scope": 657,
+        "scope": 655,
         "src": "26:1002:4"
       }
     ],
@@ -901,5 +901,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.0",
-  "updatedAt": "2018-04-12T20:30:30.542Z"
+  "updatedAt": "2018-04-25T21:06:22.438Z"
 }

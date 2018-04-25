@@ -14,7 +14,7 @@
       padding: 40px;
     }
 
-    input[type="text"] {
+    input[type="text"] , input[type="number"] {
       background: #f9f9ff;
       border: 1px solid #ccc;
       padding: 8px;
@@ -41,10 +41,6 @@
 
     button.buysell {
       padding: 14px;
-    }
-
-    h2 {
-      padding: 8px;
     }
 
     ul {
@@ -89,6 +85,14 @@
 
     <h2>Tokens on Sale</h2>
     <div id="tokensForSale" style="margin: 0px auto; color: #ddd; padding-left: 8px">No tokens yet.</div>
+
+    <div id="set-token-price" style="display:none">
+      <h2>Contract Owner Actions</h2>
+      <em>These actions are only visible to the account that deployed the contract.</em>
+      <h4>Set Unclaimed Token Price in wei</h4>
+      <input type="number" step="0.0001" min="0.0000000000001"> ETH
+      <button class="buysell">Set Price</button>
+    </div>
   </div>
 
   <div id="error" class="card" style="display:none"></div>
@@ -104,7 +108,7 @@
     const marketplaceAbi = {{{marketplaceAbi}}}
     const marketplaceAddress = '{{{marketplaceAddress}}}'
 
-    var seed = 0.8216407443206786 //Math.random()
+    var seed = 0.8216407443206786
 
     var pattern = Trianglify({
       height: window.innerHeight,

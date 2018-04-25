@@ -22,8 +22,10 @@ contract TimewalkLand is Owned, FullAssetRegistry {
 
   Marketplace public marketplaceContract;
 
-  function setPrice(uint256 _newPriceInFinneey) onlyOwner public {
-    price = _newPriceInFinneey * 1 finney;
+  // _newPrice is expressed in wei
+  function setPrice(uint256 _newPrice) onlyOwner public {
+    //price = _newPriceInFinneey * 1 finney;
+    price = _newPrice;
   }
 
   function claim(string _placeData) payable public {
@@ -54,7 +56,7 @@ contract TimewalkLand is Owned, FullAssetRegistry {
 
   function approveAndSell(uint _assetId, uint _amount) public {
     approve(address(marketplaceContract), _assetId);
-    
+
     marketplaceContract.sell(msg.sender, _assetId, _amount);
   }
 
@@ -64,7 +66,7 @@ contract TimewalkLand is Owned, FullAssetRegistry {
 
   function setMarketplaceContract(address _marketplace) public onlyOwner {
     require(address(marketplaceContract) == 0x0);
-    
+
     marketplaceContract = Marketplace(_marketplace);
   }
 

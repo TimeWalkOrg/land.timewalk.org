@@ -13,11 +13,12 @@ let abi, marketplaceAbi
 
 try {
   let contr = fs.readFileSync(__dirname + '/build/contracts/TimewalkLand.json')
-  contr = JSON.parse(contr)
-  abi = contr.abi
-
   let marketplaceContract = fs.readFileSync(__dirname + '/build/contracts/Marketplace.json')
+
+  contr = JSON.parse(contr)
   marketplaceContract = JSON.parse(marketplaceContract)
+
+  abi = contr.abi
   marketplaceAbi = marketplaceContract.abi
 
 } catch(er) {
