@@ -9,12 +9,17 @@ const mustache    = require('mustache-express')
 const querystring = require('querystring')
 
 
-let abi
+let abi, marketplaceAbi
 
 try {
   let contr = fs.readFileSync(__dirname + '/build/contracts/TimewalkLand.json')
   contr = JSON.parse(contr)
   abi = contr.abi
+
+  let marketplaceContract = fs.readFileSync(__dirname + '/build/contracts/Marketplace.json')
+  marketplaceContract = JSON.parse(marketplaceContract)
+  marketplaceAbi = marketplaceContract.abi
+
 } catch(er) {
   console.error('failed to parse contract abi. ensure it is built and try again')
   process.exit(1)
@@ -31,7 +36,14 @@ app.set('views', __dirname + '/views')
 app.use('/', express.static('public'))
 
 app.get('/', function(req, res) {
-  res.render('index', { abi: JSON.stringify(abi), contractAddress: process.env.CONTRACT_ADDRESS, priceInWei: process.env.PRICE_IN_WEI })
+  res.render('index', {
+    abi: JSON.stringify(abi),
+    marketplaceAbi: JSON.stringify(marketplaceAbi),
+    marketplaceAddress: process.env.MARKETPLACE_ADDRESS,
+    contractAddress: process.env.CONTRACT_ADDRESS,
+    contractNetwork: process.env.CONTRACT_NETWORK,
+    priceInWei: process.env.PRICE_IN_WEI
+  })
 })
 
 // all routes below this line are API calls and should never cache.

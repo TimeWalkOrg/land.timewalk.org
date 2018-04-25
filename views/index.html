@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -39,43 +39,84 @@
       background: lightsteelblue;
     }
 
+    button.buysell {
+      padding: 14px;
+    }
+
     h2 {
-      max-width: 600px;
-      margin: 0px auto;
       padding: 8px;
     }
 
     ul {
-      margin: 0;
-      padding-left: 24px;
+      list-style: none;
+      padding: 0px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    #main {
+      max-width: 600px;
+      margin: 0px auto;
+      background-color: rgba(255,255,255,1);
+      padding: 20px;
+      box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    }
+
+    @media only screen and (max-width: 580px) {
+      ul {
+        grid-template-columns: 1fr;
+      }
     }
 
   </style>
+<script src="trianglify.min.js"></script>
 </head>
 <body>
 
-  <h2>Buy Token</h2>
+  <div id="main" class="card" style="display:none">
+    <h2>Buy Token</h2>
 
-  <div style="display: grid; grid-template-columns: 1fr; grid-template-rows: 40px 1fr; grid-gap: 10px; max-width: 600px; margin: 0px auto;">
-    <form style="display: grid; grid-template-columns: 1fr 60px 90px; grid-column: 1 / span 3; grid-gap: 10px">
+    <div style="display: grid; grid-template-columns: 1fr 60px 90px; grid-template-rows: 40px 1fr; grid-gap: 10px;">
       <input id="place" type="text" placeholder="e.g., 428 Howe st. Oakland, CA" required/>
       <input id="year" type="text" placeholder="year" required/>
       <button id="search">Search</button>
-    </form>
-    <div id="result" style="padding: 8px; min-height: 80px"></div>
-    <button id="register" style="grid-column: 2 / span 2; height: 40px; display:none">Claim</button>
+      <div id="result" style="padding: 8px; min-height: 80px"></div>
+      <button id="register" style="grid-column: 2 / span 2; height: 40px; display:none">Claim</button>
+    </div>
+
+    <h2>Your Tokens</h2>
+    <div id="tokensForOwner" style="margin: 0px auto; color: #ddd; padding-left: 8px">No tokens yet.</div>
+
+    <h2>Tokens on Sale</h2>
+    <div id="tokensForSale" style="margin: 0px auto; color: #ddd; padding-left: 8px">No tokens yet.</div>
   </div>
 
-  <h2>Your Tokens</h2>
-
-  <div id="tokensForOwner" style="max-width: 600px; margin: 0px auto; color: #888">No tokens yet.</div>
+  <div id="error" class="card" style="display:none"></div>
 
   <script>
     'use strict'
 
     const abi = {{{abi}}}
+    const contractNetwork = '{{{contractNetwork}}}'
     const contractAddress = '{{{contractAddress}}}'
     const priceInWei = {{{priceInWei}}}
+
+    const marketplaceAbi = {{{marketplaceAbi}}}
+    const marketplaceAddress = '{{{marketplaceAddress}}}'
+
+    var seed = 0.8216407443206786 //Math.random()
+
+    var pattern = Trianglify({
+      height: window.innerHeight,
+      width: window.innerWidth,
+      seed: seed,
+      cell_size: 30 + Math.random() * 100 })
+
+    var png = document.createElement('img')
+    png.src = pattern.png()
+
+    document.body.style.background = 'url(' + pattern.png() + ')'
+    document.body.style.backgroundSize = 'cover'
   </script>
 
   <script src="bundle.js"></script>

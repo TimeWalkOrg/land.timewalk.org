@@ -1,25 +1,8 @@
 pragma solidity ^0.4.17;
 
 import 'erc821/contracts/FullAssetRegistry.sol';
-
-
-contract Owned {
-  address public owner;
-
-  function Owned() public {
-    owner = msg.sender;
-  }
-
-  modifier onlyOwner {
-    require(msg.sender == owner);
-    _;
-  }
-
-  function transferOwnership(address newOwner) onlyOwner public {
-    owner = newOwner;
-  }
-}
-
+import './Owned.sol';
+import './Marketplace.sol';
 
 contract TimewalkLand is Owned, FullAssetRegistry {
 
@@ -37,11 +20,12 @@ contract TimewalkLand is Owned, FullAssetRegistry {
   // expressed in wei
   uint256 public price;
 
-  function setPrices(uint256 _newPriceInFinneey) onlyOwner public {
+  Marketplace public marketplaceContract;
+
+  function setPrice(uint256 _newPriceInFinneey) onlyOwner public {
     price = _newPriceInFinneey * 1 finney;
   }
 
-  // check if the assetId is already taken
   function claim(string _placeData) payable public {
     require(msg.value >= price);
 
@@ -68,8 +52,20 @@ contract TimewalkLand is Owned, FullAssetRegistry {
     }
   }
 
+  function approveAndSell(uint _assetId, uint _amount) public {
+    approve(address(marketplaceContract), _assetId);
+    
+    marketplaceContract.sell(msg.sender, _assetId, _amount);
+  }
+
   function withdraw() onlyOwner public {
     msg.sender.transfer(this.balance);
+  }
+
+  function setMarketplaceContract(address _marketplace) public onlyOwner {
+    require(address(marketplaceContract) == 0x0);
+    
+    marketplaceContract = Marketplace(_marketplace);
   }
 
 }
