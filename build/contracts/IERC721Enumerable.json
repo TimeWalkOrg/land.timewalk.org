@@ -48,20 +48,20 @@
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity ^0.4.18;\n\ncontract IERC721Enumerable {\n\n  /**\n   * @notice Enumerate active tokens\n   * @dev Throws if `index` >= `totalSupply()`, otherwise SHALL NOT throw.\n   * @param index A counter less than `totalSupply()`\n   * @return The identifier for the `index`th asset, (sort order not\n   *  specified)\n   */\n  // TODO (eordano): Not implemented\n  // function tokenByIndex(uint256 index) public view returns (uint256 _assetId);\n\n  /**\n   * @notice Count of owners which own at least one asset\n   *  Must not throw.\n   * @return A count of the number of owners which own asset\n   */\n  // TODO (eordano): Not implemented\n  // function countOfOwners() public view returns (uint256 _count);\n\n  /**\n   * @notice Enumerate owners\n   * @dev Throws if `index` >= `countOfOwners()`, otherwise must not throw.\n   * @param index A counter less than `countOfOwners()`\n   * @return The address of the `index`th owner (sort order not specified)\n   */\n  // TODO (eordano): Not implemented\n  // function ownerByIndex(uint256 index) public view returns (address owner);\n\n  /**\n   * @notice Get all tokens of a given address\n   * @dev This is not intended to be used on-chain\n   * @param owner address of the owner to query\n   * @return a list of all assetIds of a user\n   */\n  function tokensOf(address owner) public view returns (uint256[]);\n\n  /**\n   * @notice Enumerate tokens assigned to an owner\n   * @dev Throws if `index` >= `balanceOf(owner)` or if\n   *  `owner` is the zero address, representing invalid assets.\n   *  Otherwise this must not throw.\n   * @param owner An address where we are interested in assets owned by them\n   * @param index A counter less than `balanceOf(owner)`\n   * @return The identifier for the `index`th asset assigned to `owner`,\n   *   (sort order not specified)\n   */\n  function tokenOfOwnerByIndex(\n    address owner, uint256 index\n  ) public view returns (uint256 tokenId);\n}\n",
+  "source": "pragma solidity ^0.4.18;\n\ncontract IERC721Enumerable {\n\n  /**\n   * @notice Enumerate active tokens\n   * @dev Throws if `index` >= `totalSupply()`, otherwise SHALL NOT throw.\n   * @param index A counter less than `totalSupply()`\n   * @return The identifier for the `index`th asset, (sort order not\n   *  specified)\n   */\n  // TODO (eordano): Not implemented\n  // function tokenByIndex(uint256 index) public view returns (uint256 _assetId);\n\n  /**\n   * @notice Count of owners which own at least one asset\n   *  Must not throw.\n   * @return A count of the number of owners which own asset\n   */\n  // TODO (eordano): Not implemented\n  // function countOfOwners() public view returns (uint256 _count);\n\n  /**\n   * @notice Enumerate owners\n   * @dev Throws if `index` >= `countOfOwners()`, otherwise must not throw.\n   * @param index A counter less than `countOfOwners()`\n   * @return The address of the `index`th owner (sort order not specified)\n   */\n  // TODO (eordano): Not implemented\n  // function ownerByIndex(uint256 index) public view returns (address owner);\n\n  /**\n   * @notice Get all tokens of a given address\n   * @dev This is not intended to be used on-chain\n   * @param owner address of the owner to query\n   * @return a list of all assetIds of a user\n   */\n  function tokensOf(address owner) external view returns (uint256[]);\n\n  /**\n   * @notice Enumerate tokens assigned to an owner\n   * @dev Throws if `index` >= `balanceOf(owner)` or if\n   *  `owner` is the zero address, representing invalid assets.\n   *  Otherwise this must not throw.\n   * @param owner An address where we are interested in assets owned by them\n   * @param index A counter less than `balanceOf(owner)`\n   * @return The identifier for the `index`th asset assigned to `owner`,\n   *   (sort order not specified)\n   */\n  function tokenOfOwnerByIndex(\n    address owner, uint256 index\n  ) external view returns (uint256 tokenId);\n}\n",
   "sourcePath": "erc821/contracts/IERC721Enumerable.sol",
   "ast": {
     "absolutePath": "erc821/contracts/IERC721Enumerable.sol",
     "exportedSymbols": {
       "IERC721Enumerable": [
-        1678
+        1806
       ]
     },
-    "id": 1679,
+    "id": 1807,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1660,
+        "id": 1788,
         "literals": [
           "solidity",
           "^",
@@ -69,7 +69,7 @@
           ".18"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:10"
+        "src": "0:24:11"
       },
       {
         "baseContracts": [],
@@ -77,9 +77,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1678,
+        "id": 1806,
         "linearizedBaseContracts": [
-          1678
+          1806
         ],
         "name": "IERC721Enumerable",
         "nodeType": "ContractDefinition",
@@ -87,7 +87,7 @@
           {
             "body": null,
             "documentation": "@notice Get all tokens of a given address\n@dev This is not intended to be used on-chain\n@param owner address of the owner to query\n@return a list of all assetIds of a user",
-            "id": 1668,
+            "id": 1796,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -95,16 +95,16 @@
             "name": "tokensOf",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1663,
+              "id": 1791,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1662,
+                  "id": 1790,
                   "name": "owner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1668,
-                  "src": "1289:13:10",
+                  "scope": 1796,
+                  "src": "1289:13:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -112,10 +112,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1661,
+                    "id": 1789,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1289:7:10",
+                    "src": "1289:7:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -125,20 +125,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1288:15:10"
+              "src": "1288:15:11"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1667,
+              "id": 1795,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1666,
+                  "id": 1794,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1668,
-                  "src": "1325:9:10",
+                  "scope": 1796,
+                  "src": "1327:9:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -147,19 +147,19 @@
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 1664,
+                      "id": 1792,
                       "name": "uint256",
                       "nodeType": "ElementaryTypeName",
-                      "src": "1325:7:10",
+                      "src": "1327:7:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       }
                     },
-                    "id": 1665,
+                    "id": 1793,
                     "length": null,
                     "nodeType": "ArrayTypeName",
-                    "src": "1325:9:10",
+                    "src": "1327:9:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
                       "typeString": "uint256[]"
@@ -169,18 +169,18 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1324:11:10"
+              "src": "1326:11:11"
             },
-            "scope": 1678,
-            "src": "1271:65:10",
+            "scope": 1806,
+            "src": "1271:67:11",
             "stateMutability": "view",
             "superFunction": null,
-            "visibility": "public"
+            "visibility": "external"
           },
           {
             "body": null,
             "documentation": "@notice Enumerate tokens assigned to an owner\n@dev Throws if `index` >= `balanceOf(owner)` or if\n `owner` is the zero address, representing invalid assets.\n Otherwise this must not throw.\n@param owner An address where we are interested in assets owned by them\n@param index A counter less than `balanceOf(owner)`\n@return The identifier for the `index`th asset assigned to `owner`,\n  (sort order not specified)",
-            "id": 1677,
+            "id": 1805,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -188,16 +188,16 @@
             "name": "tokenOfOwnerByIndex",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1673,
+              "id": 1801,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1670,
+                  "id": 1798,
                   "name": "owner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1677,
-                  "src": "1835:13:10",
+                  "scope": 1805,
+                  "src": "1837:13:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -205,10 +205,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1669,
+                    "id": 1797,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1835:7:10",
+                    "src": "1837:7:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -219,11 +219,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 1672,
+                  "id": 1800,
                   "name": "index",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1677,
-                  "src": "1850:13:10",
+                  "scope": 1805,
+                  "src": "1852:13:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -231,10 +231,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1671,
+                    "id": 1799,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1850:7:10",
+                    "src": "1852:7:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -244,20 +244,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1829:38:10"
+              "src": "1831:38:11"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1676,
+              "id": 1804,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1675,
+                  "id": 1803,
                   "name": "tokenId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1677,
-                  "src": "1889:15:10",
+                  "scope": 1805,
+                  "src": "1893:15:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -265,10 +265,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1674,
+                    "id": 1802,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1889:7:10",
+                    "src": "1893:7:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -278,33 +278,33 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1888:17:10"
+              "src": "1892:17:11"
             },
-            "scope": 1678,
-            "src": "1801:105:10",
+            "scope": 1806,
+            "src": "1803:107:11",
             "stateMutability": "view",
             "superFunction": null,
-            "visibility": "public"
+            "visibility": "external"
           }
         ],
-        "scope": 1679,
-        "src": "26:1882:10"
+        "scope": 1807,
+        "src": "26:1886:11"
       }
     ],
-    "src": "0:1909:10"
+    "src": "0:1913:11"
   },
   "legacyAST": {
     "absolutePath": "erc821/contracts/IERC721Enumerable.sol",
     "exportedSymbols": {
       "IERC721Enumerable": [
-        1678
+        1806
       ]
     },
-    "id": 1679,
+    "id": 1807,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1660,
+        "id": 1788,
         "literals": [
           "solidity",
           "^",
@@ -312,7 +312,7 @@
           ".18"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:10"
+        "src": "0:24:11"
       },
       {
         "baseContracts": [],
@@ -320,9 +320,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1678,
+        "id": 1806,
         "linearizedBaseContracts": [
-          1678
+          1806
         ],
         "name": "IERC721Enumerable",
         "nodeType": "ContractDefinition",
@@ -330,7 +330,7 @@
           {
             "body": null,
             "documentation": "@notice Get all tokens of a given address\n@dev This is not intended to be used on-chain\n@param owner address of the owner to query\n@return a list of all assetIds of a user",
-            "id": 1668,
+            "id": 1796,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -338,16 +338,16 @@
             "name": "tokensOf",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1663,
+              "id": 1791,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1662,
+                  "id": 1790,
                   "name": "owner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1668,
-                  "src": "1289:13:10",
+                  "scope": 1796,
+                  "src": "1289:13:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -355,10 +355,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1661,
+                    "id": 1789,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1289:7:10",
+                    "src": "1289:7:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -368,20 +368,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1288:15:10"
+              "src": "1288:15:11"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1667,
+              "id": 1795,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1666,
+                  "id": 1794,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1668,
-                  "src": "1325:9:10",
+                  "scope": 1796,
+                  "src": "1327:9:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -390,19 +390,19 @@
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 1664,
+                      "id": 1792,
                       "name": "uint256",
                       "nodeType": "ElementaryTypeName",
-                      "src": "1325:7:10",
+                      "src": "1327:7:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       }
                     },
-                    "id": 1665,
+                    "id": 1793,
                     "length": null,
                     "nodeType": "ArrayTypeName",
-                    "src": "1325:9:10",
+                    "src": "1327:9:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
                       "typeString": "uint256[]"
@@ -412,18 +412,18 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1324:11:10"
+              "src": "1326:11:11"
             },
-            "scope": 1678,
-            "src": "1271:65:10",
+            "scope": 1806,
+            "src": "1271:67:11",
             "stateMutability": "view",
             "superFunction": null,
-            "visibility": "public"
+            "visibility": "external"
           },
           {
             "body": null,
             "documentation": "@notice Enumerate tokens assigned to an owner\n@dev Throws if `index` >= `balanceOf(owner)` or if\n `owner` is the zero address, representing invalid assets.\n Otherwise this must not throw.\n@param owner An address where we are interested in assets owned by them\n@param index A counter less than `balanceOf(owner)`\n@return The identifier for the `index`th asset assigned to `owner`,\n  (sort order not specified)",
-            "id": 1677,
+            "id": 1805,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -431,16 +431,16 @@
             "name": "tokenOfOwnerByIndex",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1673,
+              "id": 1801,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1670,
+                  "id": 1798,
                   "name": "owner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1677,
-                  "src": "1835:13:10",
+                  "scope": 1805,
+                  "src": "1837:13:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -448,10 +448,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1669,
+                    "id": 1797,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1835:7:10",
+                    "src": "1837:7:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -462,11 +462,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 1672,
+                  "id": 1800,
                   "name": "index",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1677,
-                  "src": "1850:13:10",
+                  "scope": 1805,
+                  "src": "1852:13:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -474,10 +474,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1671,
+                    "id": 1799,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1850:7:10",
+                    "src": "1852:7:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -487,20 +487,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1829:38:10"
+              "src": "1831:38:11"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1676,
+              "id": 1804,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1675,
+                  "id": 1803,
                   "name": "tokenId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1677,
-                  "src": "1889:15:10",
+                  "scope": 1805,
+                  "src": "1893:15:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -508,10 +508,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1674,
+                    "id": 1802,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1889:7:10",
+                    "src": "1893:7:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -521,20 +521,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1888:17:10"
+              "src": "1892:17:11"
             },
-            "scope": 1678,
-            "src": "1801:105:10",
+            "scope": 1806,
+            "src": "1803:107:11",
             "stateMutability": "view",
             "superFunction": null,
-            "visibility": "public"
+            "visibility": "external"
           }
         ],
-        "scope": 1679,
-        "src": "26:1882:10"
+        "scope": 1807,
+        "src": "26:1886:11"
       }
     ],
-    "src": "0:1909:10"
+    "src": "0:1913:11"
   },
   "compiler": {
     "name": "solc",
@@ -542,5 +542,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.0",
-  "updatedAt": "2018-04-30T18:47:05.907Z"
+  "updatedAt": "2018-04-30T18:49:03.881Z"
 }
