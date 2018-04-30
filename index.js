@@ -18,8 +18,8 @@ try {
   contr = JSON.parse(contr)
   marketplaceContract = JSON.parse(marketplaceContract)
 
-  abi = contr.abi
-  marketplaceAbi = marketplaceContract.abi
+  abi = contr
+  marketplaceAbi = marketplaceContract
 
 } catch(er) {
   console.error('failed to parse contract abi. ensure it is built and try again')

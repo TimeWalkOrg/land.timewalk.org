@@ -11,7 +11,7 @@ contract TimewalkLand is Owned, FullAssetRegistry {
   function TimewalkLand() public {
     _name = "TimewalkLand";
     _symbol = "TWL";
-    _description = "First test of timewalk land tokens";
+    _description = "Timewalk Land Tokens";
   }
 
   // map assetId to placeId
@@ -24,7 +24,6 @@ contract TimewalkLand is Owned, FullAssetRegistry {
 
   // _newPrice is expressed in wei
   function setPrice(uint256 _newPrice) onlyOwner public {
-    //price = _newPriceInFinneey * 1 finney;
     price = _newPrice;
   }
 

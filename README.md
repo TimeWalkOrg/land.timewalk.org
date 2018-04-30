@@ -2,12 +2,10 @@
 Testing tokens as a mechanism for managing TimeWalk "property rights"
 
 Deployment process:
-* ensure `ETHEREUM_ACCOUNT_MNEMONIC` and `ETHEREUM_INFURA_ACCESS_TOKEN` are set in `.env`
+* ensure `ETHEREUM_ACCOUNT_MNEMONIC` is set in `.env`
 
 ```bash
 λ rm build/contracts/*
-
-λ npm run contract-compile
 
 λ npm run contract-deploy
 
@@ -18,26 +16,26 @@ Using network 'rinkeby'.
 
 Running migration: 1_initial_migration.js
   Deploying Migrations...
-  ... 0x6986118f888e5535a65e8572731e0965587488560db3e39c2e25ce908b30061e
-  Migrations: 0x6ee2c0d9e80af21c1e0444d368f5ca6307ba9727
+  ... 0xaa74fe11c6a9e224919a676d1ef78298f6fe96a7f9f60a9626284745812df1c5
+  Migrations: 0xa7b51f75201d76578759bf995dba419c3c9c0e63
 Saving successful migration to network...
-  ... 0x0ee8b44f2697b241fbc3e53b7a2f95c182b01878a24822780acc25a1b62d38bf
+  ... 0x43256304fb35f97aceca7d091eb66fc0685bbf8c1a67d8581a89b9e2cffca953
 Saving artifacts...
 Running migration: 2_deploy_contracts.js
-  Deploying TimewalkLand...
-  ... 0xddd84b7fb154f893335c82fad8e9f006d6216d597805e4433f946e5e90aee726
-  TimewalkLand: 0x5332b0023b7f023a1739030b938110095ee99534
-  Deploying Marketplace...
-  ... 0xe49185ce1a5238985065a5214a4eb76885b9b00262b3054eb810a1ca939fc1aa
-  Marketplace: 0xa4d156f8960d5c5f800a477c8536d9a5e5c853bd
+  Running step...
+  ... 0xa80805a0c52f9035dfe67e517bffa764fc756d48ba7afa719562f7541b8fd166
+  ... 0x4d5af933bca01d6b180699c9e09d34d99758fe59aaeb8449bdd57a76a8ae44e0
+Token: 0x999a47d31e0a52fc9c96fcb06fed0b250303205f Marketplace: 0xac28644f22de151bcfe3f7a85da14020d1603128
+  ... 0xc9918fa28da581ad1b472e9acfd6fd14166fc3b5a441d1afbcdec3055f5ee14c
 Saving successful migration to network...
-  ... 0x2ee8642e33ed7ad7dd1b7ff999a939f6f2267820016bae8ef6d5d7262fcd289a
+  ... 0x3dd2961a7115e069c52a635782e788e406528749cbbd17d98a1bbb81b20a7f58
+Saving artifacts...
 
 λ
 ```
 
 now update `.env`, filling in `CONTRACT_ADDRESS` and `MARKETPLACE_ADDRESS` with the 2 deployed contracts.
 
-In this example, `0x5332b0023b7f023a1739030b938110095ee99534` is the `CONTRACT_ADDRESS` and `0xa4d156f8960d5c5f800a477c8536d9a5e5c853bd` is the `MARKETPLACE_ADDRESS`
+In this example, `0x999a47d31e0a52fc9c96fcb06fed0b250303205f` is the `CONTRACT_ADDRESS` and `0xac28644f22de151bcfe3f7a85da14020d1603128` is the `MARKETPLACE_ADDRESS`
 
 after deploying the contract, be sure to go to the user interface and set the default buy price for tokens.

@@ -1,7 +1,8 @@
 'use strict'
 
-const bigInt = require('big-integer')
-const Web3   = require('web3')
+const bigInt          = require('big-integer')
+const Web3            = require('web3')
+const truffleContract = require('truffle-contract')
 
 
 window.addEventListener('load', async () => {
@@ -64,7 +65,7 @@ async function ownedTokenComponent(web3js, contract, tokenId) {
     tokenId = tokenId.id
 
   const span = document.createElement('p')
-  const metadata = await getMetaData(contract, tokenId)
+  const metadata = await contract.tokenMetadata(tokenId)
   const parts = metadata.split(' ')
   let result = await fetch('/code?address=' + encodeURIComponent(parts[0]))
   result = await result.json()
@@ -93,15 +94,12 @@ async function ownedTokenComponent(web3js, contract, tokenId) {
 
     li.appendChild(btn)
 
-    btn.addEventListener('click', function(ev) {
-      console.log('nice!', this.dataset.tokenId, input.value, 'adrre:', addr)
+    btn.addEventListener('click', async function (ev) {
       const tokenId = this.dataset.tokenId
       //const tokenId = getTokenId(web3js, metadata)
+      const tx = await contract.approveAndSell(tokenId, web3js.toWei(input.value, 'ether'), { from: addr })
 
-      console.log('compared to', getTokenId(web3js, metadata))
-      contract.approveAndSell(tokenId, web3js.toWei(input.value, 'ether'), { from: addr }, (err, res) => {
-        console.log('sell token:', res)
-      })
+      console.log('Token set on sale, tx hash: ', tx)
     })
   } else {
     const labl = document.createElement('span')
@@ -147,7 +145,7 @@ async function tokenForSaleComponent(web3js, contract, marketplace, token) {
   span.style.marginBottom = '4px'
   li.appendChild(span)
 
-  const metadata = await getPlaceData(contract, token.id)
+  const metadata = await contract.placeIdLookup(token.id)
   const parts = metadata.split(' ')
   let result = await fetch('/code?address=' + encodeURIComponent(parts[0]))
   result = await result.json()
@@ -174,10 +172,10 @@ async function tokenForSaleComponent(web3js, contract, marketplace, token) {
     cancelBtn.style.marginLeft = '16px'
     li.appendChild(cancelBtn)
 
-    cancelBtn.addEventListener('click', () => {
-      marketplace.cancel(token.id, {from: addr}, (err, res) => {
-        console.log(res)
-      })
+    cancelBtn.addEventListener('click', async () => {
+      const tx = await marketplace.cancel(token.id, {from: addr})
+
+      console.log(tx)
     })
   } else {
     // you can only buy tokens you don't own
@@ -185,16 +183,43 @@ async function tokenForSaleComponent(web3js, contract, marketplace, token) {
     btn.classList.add('buysell')
     btn.innerHTML = 'Buy for ' + web3js.fromWei(token.price, 'ether') + ' ETH'
 
-    btn.addEventListener('click', () => {
-      marketplace.buy(token.id, {from: addr, value: token.price}, (err, res) => {
-        console.log(res)
-      })
+    btn.addEventListener('click', async () => {
+      const tx = await marketplace.buy(token.id, {from: addr, value: token.price})
+
+      console.log(tx)
     })
 
     li.appendChild(btn)
   }
 
   return li
+}
+
+
+async function ownerWalletComponent(web3js, contract, userAddr) {
+  const ownerAddress = await contract.owner()
+
+  const contractBalance = await balanceOf(web3js, userAddr)
+
+  const ownerAddressElement = document.querySelector('#owner_address')
+  ownerAddressElement.innerHTML = `The address of the owner: ${ownerAddress}`
+
+  const contractBalanceElement = document.querySelector('#contract_balance')
+  contractBalanceElement.innerHTML = `Balance of the contract: ${web3js.fromWei(contractBalance, 'ether')} eth`
+
+  const ethAddressInput = document.querySelector('#eth_address_input')
+  const ethValueInput = document.querySelector('#amount_ether_input')
+  const transferBtn = document.querySelector('#transfer_eth_btn')
+  const withdrawBtn = document.querySelector('#withdraw_btn')
+
+  withdrawBtn.addEventListener('click', async (ev) => {
+    console.log(userAddr)
+    await contract.withdraw({from: userAddr})
+  })
+
+  transferBtn.addEventListener('click', async (ev) => {
+    await sendEther(web3js, userAddr, ethAddressInput.value, web3js.toWei(ethValueInput.value, 'ether'))
+  })
 }
 
 
@@ -208,17 +233,19 @@ function buyTokenComponent(web3js, contract, marketplace) {
   registerBtn.innerHTML = 'Buy for ' + web3js.fromWei(priceInWei, 'ether') + ' ETH'
 
   // register a token
-  registerBtn.addEventListener('click', function(ev) {
+  registerBtn.addEventListener('click', async (ev) => {
     if (!placeId || !time)
       return
 
-    contract.claim(placeId + ' ' + time, { from: addr, value: priceInWei }, (err, res) => {
-      if(!err)
-        console.log('claim result', res)
-    })
+    console.log('Starting the claim transaction....', placeId + ' ' + time)
+
+    const tx = await contract.claim(placeId + ' ' + time, { from: addr, value: priceInWei })
+
+    console.log('Claim transaction mined, tx data: ')
+    console.log(tx)
   })
 
-  searchBtn.addEventListener('click', async function(ev) {
+  searchBtn.addEventListener('click', async (ev) => {
     ev.preventDefault()
     searchBtn.setAttribute('disabled', true)
 
@@ -236,7 +263,7 @@ function buyTokenComponent(web3js, contract, marketplace) {
     time = document.querySelector('#year').value
 
     // check if the place is available
-    const isAvailable = await isPlaceAvailable(contract, placeId, time)
+    const isAvailable = await contract.placeAvailable(placeId + " " + time)
 
     const el = document.getElementById('result')
 
@@ -264,36 +291,35 @@ function buyTokenComponent(web3js, contract, marketplace) {
 
 
 // ui for the owner of the contract to adjust price
-function setTokenPriceComponent(web3js, contract) {
+async function setTokenPriceComponent(web3js, contract) {
   const addr = web3js.eth.accounts[0]
   const tokenPriceEl = document.getElementById('set-token-price')
 
-  /*
-  contract.price(function(e, r) {
-    console.log('current price:', r.toString())
-  })
-  */
+  const owner = await contract.owner()
 
-  contract.owner(function(er, owner) {
-    tokenPriceEl.style.display = (owner === addr) ? '' : 'none'
+  tokenPriceEl.style.display = (owner === addr) ? '' : 'none'
 
-    const input = tokenPriceEl.querySelector('input')
-    input.value = web3js.fromWei(priceInWei, 'ether')
+  const input = tokenPriceEl.querySelector('input')
+  input.value = web3js.fromWei(priceInWei, 'ether')
 
-    const btn = tokenPriceEl.querySelector('button')
-    btn.addEventListener('click', function(ev) {
-      contract._eth.defaultAccount = addr
-      contract.setPrice(web3js.toWei(input.value, 'ether'), function(err, result) {
-        console.log('set price result. err:', err, ' result:', result)
-      })
-    })
+  const btn = tokenPriceEl.querySelector('button')
+
+  btn.addEventListener('click', async (ev) => {
+    await contract.setPrice(web3js.toWei(input.value, 'ether'), {from: owner})
   })
 }
 
 
 async function setupApp(web3js) {
-  const contract = web3js.eth.contract(abi).at(contractAddress)
-  const marketplace = web3js.eth.contract(marketplaceAbi).at(marketplaceAddress)
+  const tokenContract = truffleContract(abi)
+  const marketplaceContract = truffleContract(marketplaceAbi)
+
+  tokenContract.setProvider(web3js.currentProvider)
+  marketplaceContract.setProvider(web3js.currentProvider)
+
+  const contract = tokenContract.at(contractAddress)
+  const marketplace = marketplaceContract.at(marketplaceAddress)
+
   const addr = web3js.eth.accounts[0]
 
   let tokenIds = await listTokensForOwner(contract, addr)
@@ -303,7 +329,7 @@ async function setupApp(web3js) {
 
   setTokenPriceComponent(web3js, contract)
 
-  //if  (usersTokensOnSale.length > 0)
+  // if  (usersTokensOnSale.length > 0)
   //  tokenIds = [...tokenIds, ...usersTokensOnSale]
 
   const ul = await ownedTokensComponent(web3js, contract, marketplace, tokenIds, tokensForSale)
@@ -312,7 +338,9 @@ async function setupApp(web3js) {
   const ulSale = tokensForSaleComponent(web3js, contract, marketplace, tokensForSale)
   document.getElementById('tokensForSale').appendChild(ulSale)
 
-  buyTokenComponent(web3js, contract, marketplace)
+  await buyTokenComponent(web3js, contract, marketplace)
+
+  await ownerWalletComponent(web3js, contract, addr)
 
   return true
 }
@@ -365,85 +393,55 @@ async function getEthereumNetwork(web3js) {
 }
 
 
-async function isPlaceAvailable(contract, placeId, time)  {
-  return new Promise(function(resolve, reject) {
-    contract.placeAvailable(placeId + " " + time, function(err, available) {
-      if(err)
-        return reject(err)
-      resolve(available)
-    })
-  })
-}
-
-
 async function listTokensForOwner(contract, accountAddress) {
-  return new Promise((resolve, reject) => {
-    contract.tokensOf(accountAddress, (err, tokenIds) => {
-      if(err)
-        return reject(err)
+  let tokenIds = await contract.tokensOf(accountAddress)
+  tokenIds = tokenIds.map(t => t.toString(10))
 
-      // this are really large numbers we need to parse them as string so we can use them
-      tokenIds = tokenIds.map(t => t.toString(10))
-      resolve(tokenIds)
-    })
-  })
-}
-
-
-async function getMetaData(contract, tokenId) {
-  return new Promise((resolve , rejecet) => {
-    contract.tokenMetadata(tokenId, (err, metadata) => {
-      if(err)
-        reject(err)
-      else
-        resolve(metadata)
-    })
-  })
+  return tokenIds
 }
 
 
 async function getTokensForSale(market) {
-  const tokenSaleIds = await new Promise((resolve, reject) => {
-    market.getAlltokensOnSale((err, res) => {
-      if(err)
-        reject(err)
-      else
-        resolve(res)
-    })
-  })
-
+  const tokenSaleIds = await market.getAlltokensOnSale()
   const tokenPromises = tokenSaleIds.map(t => getTokenSaleInfo(market, t))
 
   return Promise.all(tokenPromises)
 }
 
 
-function getTokenSaleInfo(market, tokenId) {
-  return new Promise((resolve, reject) => {
-    market.sellOrders(tokenId, (err, res) => {
+function sendEther(web3js, from, to, value) {
+  return new Promise((resolve , rejecet) => {
+    web3js.eth.sendTransaction({from, to, value}, (err, tx) => {
       if(err)
-        return reject(err)
-
-      resolve({
-        id: tokenId,
-        price: res[0].valueOf(),
-        seller: res[1],
-        timestamp: res[2].valueOf()
-      })
+        reject(err)
+      else
+        resolve(tx)
     })
   })
 }
 
 
-function getPlaceData(contract, tokenId) {
-  return new Promise((resolve, reject) => {
-    contract.placeIdLookup(tokenId, (err, res) => {
+function balanceOf(web3js, address) {
+  return new Promise((resolve , rejecet) => {
+    web3js.eth.getBalance(address, (err, address) => {
       if(err)
         reject(err)
       else
-        resolve(res)
+        resolve(address)
     })
   })
+}
+
+
+async function getTokenSaleInfo(market, tokenId) {
+  const res = await market.sellOrders(tokenId)
+
+  return {
+    id: tokenId,
+    price: res[0].valueOf(),
+    seller: res[1],
+    timestamp: res[2].valueOf()
+  }
 }
 
 
