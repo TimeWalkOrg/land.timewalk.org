@@ -8,7 +8,7 @@ contract TimewalkLand is Owned, FullAssetRegistry {
 
   event Claimed(address _claimer, string _placeData, uint _assetId);
 
-  function TimewalkLand() public {
+  constructor() public {
     _name = "TimewalkLand";
     _symbol = "TWL";
     _description = "Timewalk Land Tokens";
@@ -39,7 +39,7 @@ contract TimewalkLand is Owned, FullAssetRegistry {
 
       _update(assetId, _placeData);
 
-      Claimed(msg.sender, _placeData, assetId);
+      emit Claimed(msg.sender, _placeData, assetId);
     }
   }
 
@@ -54,13 +54,13 @@ contract TimewalkLand is Owned, FullAssetRegistry {
   }
 
   function approveAndSell(uint _assetId, uint _amount) public {
-    approve(address(marketplaceContract), _assetId);
+    this.approve(address(marketplaceContract), _assetId);
 
     marketplaceContract.sell(msg.sender, _assetId, _amount);
   }
 
   function withdraw() onlyOwner public {
-    msg.sender.transfer(this.balance);
+    msg.sender.transfer(address(this).balance);
   }
 
   function setMarketplaceContract(address _marketplace) public onlyOwner {

@@ -73,14 +73,14 @@
     "absolutePath": "erc821/contracts/IERC721Metadata.sol",
     "exportedSymbols": {
       "IERC721Metadata": [
-        1699
+        1703
       ]
     },
-    "id": 1700,
+    "id": 1704,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1676,
+        "id": 1680,
         "literals": [
           "solidity",
           "^",
@@ -96,16 +96,17 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1699,
+        "id": 1703,
         "linearizedBaseContracts": [
-          1699
+          1703
         ],
         "name": "IERC721Metadata",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": null,
-            "id": 1681,
+            "documentation": "@notice A descriptive name for a collection of NFTs in this contract",
+            "id": 1685,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -113,37 +114,37 @@
             "name": "name",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1677,
+              "id": 1681,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "155:2:11"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1680,
+              "id": 1684,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1679,
+                  "id": 1683,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1681,
+                  "scope": 1685,
                   "src": "179:6:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string memory"
+                    "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1678,
+                    "id": 1682,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "179:6:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string storage pointer"
+                      "typeString": "string"
                     }
                   },
                   "value": null,
@@ -152,7 +153,7 @@
               ],
               "src": "178:8:11"
             },
-            "scope": 1699,
+            "scope": 1703,
             "src": "142:45:11",
             "stateMutability": "view",
             "superFunction": null,
@@ -160,7 +161,8 @@
           },
           {
             "body": null,
-            "id": 1686,
+            "documentation": "@notice An abbreviated name for NFTs in this contract",
+            "id": 1690,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -168,37 +170,37 @@
             "name": "symbol",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1682,
+              "id": 1686,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "277:2:11"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1685,
+              "id": 1689,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1684,
+                  "id": 1688,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1686,
+                  "scope": 1690,
                   "src": "301:6:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string memory"
+                    "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1683,
+                    "id": 1687,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "301:6:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string storage pointer"
+                      "typeString": "string"
                     }
                   },
                   "value": null,
@@ -207,7 +209,7 @@
               ],
               "src": "300:8:11"
             },
-            "scope": 1699,
+            "scope": 1703,
             "src": "262:47:11",
             "stateMutability": "view",
             "superFunction": null,
@@ -215,7 +217,8 @@
           },
           {
             "body": null,
-            "id": 1691,
+            "documentation": "@notice A description of what this DAR is used for",
+            "id": 1695,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -223,37 +226,37 @@
             "name": "description",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1687,
+              "id": 1691,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "401:2:11"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1690,
+              "id": 1694,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1689,
+                  "id": 1693,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1691,
+                  "scope": 1695,
                   "src": "425:6:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string memory"
+                    "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1688,
+                    "id": 1692,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "425:6:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string storage pointer"
+                      "typeString": "string"
                     }
                   },
                   "value": null,
@@ -262,7 +265,7 @@
               ],
               "src": "424:8:11"
             },
-            "scope": 1699,
+            "scope": 1703,
             "src": "381:52:11",
             "stateMutability": "view",
             "superFunction": null,
@@ -270,7 +273,8 @@
           },
           {
             "body": null,
-            "id": 1698,
+            "documentation": "Stores arbitrary info about a token",
+            "id": 1702,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -278,15 +282,15 @@
             "name": "tokenMetadata",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1694,
+              "id": 1698,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1693,
+                  "id": 1697,
                   "name": "assetId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1698,
+                  "scope": 1702,
                   "src": "513:15:11",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -295,7 +299,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1692,
+                    "id": 1696,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "513:7:11",
@@ -312,30 +316,30 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 1697,
+              "id": 1701,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1696,
+                  "id": 1700,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1698,
+                  "scope": 1702,
                   "src": "551:6:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string memory"
+                    "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1695,
+                    "id": 1699,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "551:6:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string storage pointer"
+                      "typeString": "string"
                     }
                   },
                   "value": null,
@@ -344,14 +348,14 @@
               ],
               "src": "550:8:11"
             },
-            "scope": 1699,
+            "scope": 1703,
             "src": "490:69:11",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 1700,
+        "scope": 1704,
         "src": "26:535:11"
       }
     ],
@@ -361,14 +365,14 @@
     "absolutePath": "erc821/contracts/IERC721Metadata.sol",
     "exportedSymbols": {
       "IERC721Metadata": [
-        1699
+        1703
       ]
     },
-    "id": 1700,
+    "id": 1704,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1676,
+        "id": 1680,
         "literals": [
           "solidity",
           "^",
@@ -384,16 +388,17 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1699,
+        "id": 1703,
         "linearizedBaseContracts": [
-          1699
+          1703
         ],
         "name": "IERC721Metadata",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": null,
-            "id": 1681,
+            "documentation": "@notice A descriptive name for a collection of NFTs in this contract",
+            "id": 1685,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -401,37 +406,37 @@
             "name": "name",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1677,
+              "id": 1681,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "155:2:11"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1680,
+              "id": 1684,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1679,
+                  "id": 1683,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1681,
+                  "scope": 1685,
                   "src": "179:6:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string memory"
+                    "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1678,
+                    "id": 1682,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "179:6:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string storage pointer"
+                      "typeString": "string"
                     }
                   },
                   "value": null,
@@ -440,7 +445,7 @@
               ],
               "src": "178:8:11"
             },
-            "scope": 1699,
+            "scope": 1703,
             "src": "142:45:11",
             "stateMutability": "view",
             "superFunction": null,
@@ -448,7 +453,8 @@
           },
           {
             "body": null,
-            "id": 1686,
+            "documentation": "@notice An abbreviated name for NFTs in this contract",
+            "id": 1690,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -456,37 +462,37 @@
             "name": "symbol",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1682,
+              "id": 1686,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "277:2:11"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1685,
+              "id": 1689,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1684,
+                  "id": 1688,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1686,
+                  "scope": 1690,
                   "src": "301:6:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string memory"
+                    "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1683,
+                    "id": 1687,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "301:6:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string storage pointer"
+                      "typeString": "string"
                     }
                   },
                   "value": null,
@@ -495,7 +501,7 @@
               ],
               "src": "300:8:11"
             },
-            "scope": 1699,
+            "scope": 1703,
             "src": "262:47:11",
             "stateMutability": "view",
             "superFunction": null,
@@ -503,7 +509,8 @@
           },
           {
             "body": null,
-            "id": 1691,
+            "documentation": "@notice A description of what this DAR is used for",
+            "id": 1695,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -511,37 +518,37 @@
             "name": "description",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1687,
+              "id": 1691,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "401:2:11"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1690,
+              "id": 1694,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1689,
+                  "id": 1693,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1691,
+                  "scope": 1695,
                   "src": "425:6:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string memory"
+                    "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1688,
+                    "id": 1692,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "425:6:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string storage pointer"
+                      "typeString": "string"
                     }
                   },
                   "value": null,
@@ -550,7 +557,7 @@
               ],
               "src": "424:8:11"
             },
-            "scope": 1699,
+            "scope": 1703,
             "src": "381:52:11",
             "stateMutability": "view",
             "superFunction": null,
@@ -558,7 +565,8 @@
           },
           {
             "body": null,
-            "id": 1698,
+            "documentation": "Stores arbitrary info about a token",
+            "id": 1702,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -566,15 +574,15 @@
             "name": "tokenMetadata",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1694,
+              "id": 1698,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1693,
+                  "id": 1697,
                   "name": "assetId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1698,
+                  "scope": 1702,
                   "src": "513:15:11",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -583,7 +591,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1692,
+                    "id": 1696,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "513:7:11",
@@ -600,30 +608,30 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 1697,
+              "id": 1701,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1696,
+                  "id": 1700,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1698,
+                  "scope": 1702,
                   "src": "551:6:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string memory"
+                    "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1695,
+                    "id": 1699,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "551:6:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string storage pointer"
+                      "typeString": "string"
                     }
                   },
                   "value": null,
@@ -632,14 +640,14 @@
               ],
               "src": "550:8:11"
             },
-            "scope": 1699,
+            "scope": 1703,
             "src": "490:69:11",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 1700,
+        "scope": 1704,
         "src": "26:535:11"
       }
     ],
@@ -647,9 +655,9 @@
   },
   "compiler": {
     "name": "solc",
-    "version": "0.4.19+commit.c4cbbb05.Emscripten.clang"
+    "version": "0.4.23+commit.124ca40d.Emscripten.clang"
   },
   "networks": {},
   "schemaVersion": "2.0.0",
-  "updatedAt": "2018-04-30T15:20:54.734Z"
+  "updatedAt": "2018-04-30T18:47:05.907Z"
 }

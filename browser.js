@@ -94,9 +94,14 @@ async function ownedTokenComponent(web3js, contract, tokenId) {
 
     li.appendChild(btn)
 
-    btn.addEventListener('click', async function (ev) {
-      const tokenId = this.dataset.tokenId
+    btn.addEventListener('click', async (ev) => {
+      console.log('nice!', btn.dataset.tokenId, input.value, 'adrre:', addr)
+      const tokenId = btn.dataset.tokenId
       //const tokenId = getTokenId(web3js, metadata)
+
+      console.log('compared to', getTokenId(web3js, metadata))
+      console.log('sell token:')
+
       const tx = await contract.approveAndSell(tokenId, web3js.toWei(input.value, 'ether'), { from: addr })
 
       console.log('Token set on sale, tx hash: ', tx)

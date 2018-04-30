@@ -29,7 +29,7 @@ contract Marketplace {
     
     TimewalkLand public tokenContract;
     
-    function Marketplace(address _tokenAddress) public {
+    constructor(address _tokenAddress) public {
         tokenContract = TimewalkLand(_tokenAddress);
     }
 
@@ -53,7 +53,7 @@ contract Marketplace {
         tokenContract.transferFrom(_owner, this, _assetId);
         
         //Fire an sell event
-        SellOrder(_owner, _assetId, _amount);
+        emit SellOrder(_owner, _assetId, _amount);
     }
     
     function buy(uint _assetId) public payable {
@@ -76,7 +76,7 @@ contract Marketplace {
         sellOrders[_assetId].seller.transfer(price);
                 
         //fire and event
-        Bought(_assetId, msg.sender, msg.value);
+        emit Bought(_assetId, msg.sender, msg.value);
     }
     
     function cancel(uint _assetId) public {
@@ -93,7 +93,7 @@ contract Marketplace {
         tokenContract.transferFrom(this, msg.sender, _assetId);
         
         //fire and event
-        Canceled(msg.sender, _assetId);
+        emit Canceled(msg.sender, _assetId);
     }
     
     function removeOrder(uint _assetId) internal {
