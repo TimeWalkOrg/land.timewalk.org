@@ -282,7 +282,13 @@ function buyTokenComponent(web3js, contract, marketplace) {
 
       console.log('toe"', tokenId, token)
 
-      if(token.seller === addr) {
+      if (token.seller === '0x0000000000000000000000000000000000000000') {
+        let myTokenIds = await listTokensForOwner(contract, addr)
+        if (myTokenIds.indexOf(tokenId) >= 0)
+          el.innerHTML = `You already own the <strong>${result.plus_code.best_street_address}</strong> in <strong>${time}</strong> token.`
+        else
+          el.innerHTML = `<strong>${result.plus_code.best_street_address}</strong> in <strong>${time}</strong> is already owned, and not for sale right now.`
+      } else if(token.seller === addr) {
         el.innerHTML = `You already own the <strong>${result.plus_code.best_street_address}</strong> in <strong>${time}</strong> token.`
       } else {
         const forSale = await tokenForSaleComponent(web3js, contract, marketplace, token)
@@ -401,7 +407,6 @@ async function getEthereumNetwork(web3js) {
 async function listTokensForOwner(contract, accountAddress) {
   let tokenIds = await contract.tokensOf(accountAddress)
   tokenIds = tokenIds.map(t => t.toString(10))
-
   return tokenIds
 }
 
