@@ -1,6 +1,6 @@
 {
-  "name": "ethereum-token-contract",
-  "version": "0.2.0",
+  "name": "land.timewalk.org",
+  "version": "0.3.0",
   "description": "",
   "main": "index.js",
   "private": true,
@@ -34,14 +34,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TimeWalkOrg/ethereum-token-contract.git"
+    "url": "git+https://github.com/TimeWalkOrg/land.timewalk.org.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TimeWalkOrg/ethereum-token-contract/issues"
+    "url": "https://github.com/TimeWalkOrg/land.timewalk.org/issues"
   },
-  "homepage": "https://github.com/TimeWalkOrg/ethereum-token-contract#readme",
+  "homepage": "https://github.com/TimeWalkOrg/land.timewalk.org#readme",
   "devDependencies": {
     "nodemon": "^1.17.4",
     "watchify": "^3.11.0"
