@@ -14,14 +14,24 @@ window.addEventListener('load', async () => {
       return
 
     if(!result.account) {
-      displayErrorPage('Please login to metamask or your ethereum client to access this app.')
+      if (web3js.currentProvider.host === INFURA_NODE) {
+
+        app = await setupApp(web3js, true)
+
+        document.getElementById('guest').style.display = ''
+        document.getElementById('main').style.display = 'none'
+        document.getElementById('error').style.display = 'none'
+      } else {
+        displayErrorPage('Please login to metamask or your ethereum client to access this app.')
+      }
     } else if(result.network !== contractNetwork) {
       displayErrorPage('This contract runs on the ethereum network:' + contractNetwork + '. Please switch to that.')
     } else {
       if(!app)
-        app = await setupApp(web3js)
+        app = await setupApp(web3js, false)
 
       document.getElementById('main').style.display = ''
+      document.getElementById('guest').style.display = 'none'
       document.getElementById('error').style.display = 'none'
     }
   })
@@ -46,7 +56,8 @@ async function ownedTokensComponent(web3js, contract, marketplace, tokenIds, tok
     if(token.seller !== addr)
       return
 
-    const li = await tokenForSaleComponent(web3js, contract, marketplace, token)
+    const li = await tokenForSaleComponent(web3js, contract, marketplace, token, true)
+
     ul.appendChild(li)
   })
 
@@ -118,8 +129,8 @@ async function ownedTokenComponent(web3js, contract, tokenId) {
 
 
 // create a UI component that shows all tokens for sale by owner
-function tokensForSaleComponent(web3js, contract, marketplace, tokensForSale) {
-  const addr = web3js.eth.accounts[0]
+function tokensForSaleComponent(web3js, contract, marketplace, tokensForSale, isInfura) {
+  const addr = isInfura ? '0x0' : web3js.eth.accounts[0]
 
   if(tokensForSale.length)
     document.getElementById('tokensForSale').innerHTML = ''
@@ -131,7 +142,7 @@ function tokensForSaleComponent(web3js, contract, marketplace, tokensForSale) {
     if(token.seller === addr)
       return
 
-    const li = await tokenForSaleComponent(web3js, contract, marketplace, token)
+    const li = await tokenForSaleComponent(web3js, contract, marketplace, token, true)
     ulSale.appendChild(li)
   })
 
@@ -140,8 +151,9 @@ function tokensForSaleComponent(web3js, contract, marketplace, tokensForSale) {
 
 
 // create a UI component for selling one token
-async function tokenForSaleComponent(web3js, contract, marketplace, token) {
-  const addr = web3js.eth.accounts[0]
+async function tokenForSaleComponent(web3js, contract, marketplace, token, isInfura) {
+  const addr = isInfura ? '0x0' : web3js.eth.accounts[0]
+
   const li = document.createElement('li')
   li.style.padding = '0px 0px 10px 0px'
 
@@ -182,7 +194,7 @@ async function tokenForSaleComponent(web3js, contract, marketplace, token) {
 
       console.log(tx)
     })
-  } else {
+  } else if(!isInfura) {
     // you can only buy tokens you don't own
     const btn = document.createElement('button')
     btn.classList.add('buysell')
@@ -190,7 +202,6 @@ async function tokenForSaleComponent(web3js, contract, marketplace, token) {
 
     btn.addEventListener('click', async () => {
       const tx = await marketplace.buy(token.id, {from: addr, value: token.price})
-
       console.log(tx)
     })
 
@@ -280,8 +291,6 @@ function buyTokenComponent(web3js, contract, marketplace) {
       let tokenId = getTokenId(web3js, placeId + " " + time)
       let token = await getTokenSaleInfo(marketplace, tokenId)
 
-      console.log('toe"', tokenId, token)
-
       if (token.seller === '0x0000000000000000000000000000000000000000') {
         let myTokenIds = await listTokensForOwner(contract, addr)
         if (myTokenIds.indexOf(tokenId) >= 0)
@@ -321,7 +330,7 @@ async function setTokenPriceComponent(web3js, contract) {
 }
 
 
-async function setupApp(web3js) {
+async function setupApp(web3js, isInfura) {
   const tokenContract = truffleContract(abi)
   const marketplaceContract = truffleContract(marketplaceAbi)
 
@@ -333,25 +342,35 @@ async function setupApp(web3js) {
 
   const addr = web3js.eth.accounts[0]
 
-  let tokenIds = await listTokensForOwner(contract, addr)
+  if (!isInfura) {
+    let tokenIds = await listTokensForOwner(contract, addr)
 
-  const tokensForSale = await getTokensForSale(marketplace)
-  const usersTokensOnSale = tokensForSale.filter(t => t.seller === addr)
+    await ownerWalletComponent(web3js, contract, addr)
 
-  setTokenPriceComponent(web3js, contract)
+    const tokensForSale = await getTokensForSale(marketplace)
+    const usersTokensOnSale = tokensForSale.filter(t => t.seller === addr)
 
-  // if  (usersTokensOnSale.length > 0)
-  //  tokenIds = [...tokenIds, ...usersTokensOnSale]
+    setTokenPriceComponent(web3js, contract)
 
-  const ul = await ownedTokensComponent(web3js, contract, marketplace, tokenIds, tokensForSale)
-  document.getElementById('tokensForOwner').appendChild(ul)
+    // if  (usersTokensOnSale.length > 0)
+    //  tokenIds = [...tokenIds, ...usersTokensOnSale]
 
-  const ulSale = tokensForSaleComponent(web3js, contract, marketplace, tokensForSale)
-  document.getElementById('tokensForSale').appendChild(ulSale)
+    const ul = await ownedTokensComponent(web3js, contract, marketplace, tokenIds, tokensForSale)
+    document.getElementById('tokensForOwner').appendChild(ul)
 
-  await buyTokenComponent(web3js, contract, marketplace)
+    const ulSale = tokensForSaleComponent(web3js, contract, marketplace, tokensForSale)
+    document.getElementById('tokensForSale').appendChild(ulSale)
 
-  await ownerWalletComponent(web3js, contract, addr)
+    await buyTokenComponent(web3js, contract, marketplace)
+  } else {
+    const tokensForSale = await getTokensForSale(marketplace)
+
+    if(tokensForSale.length)
+      document.getElementById('tokensForSale2').innerText = ''
+
+    const ulSale = tokensForSaleComponent(web3js, contract, marketplace, tokensForSale, true)
+    document.getElementById('tokensForSale2').appendChild(ulSale)
+  }
 
   return true
 }
@@ -369,11 +388,10 @@ function displayErrorPage(message) {
 function createWeb3Instance() {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined')
-    // Use Mist/MetaMask's provider
-    return new Web3(web3.currentProvider)
+    return new Web3(web3.currentProvider)  // Use Mist/MetaMask's provider
 
   // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-  return new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
+  return new Web3(new Web3.providers.HttpProvider(INFURA_NODE))
 }
 
 

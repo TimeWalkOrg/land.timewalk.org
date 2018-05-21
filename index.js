@@ -38,6 +38,7 @@ app.use('/', express.static('public'))
 
 app.get('/', function(req, res) {
   res.render('index', {
+    INFURA_NODE: process.env.INFURA_NODE,
     abi: JSON.stringify(abi),
     marketplaceAbi: JSON.stringify(marketplaceAbi),
     marketplaceAddress: process.env.MARKETPLACE_ADDRESS,

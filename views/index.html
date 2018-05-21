@@ -50,7 +50,7 @@
       grid-template-columns: repeat(2, 1fr);
     }
 
-    #main {
+    #main, #guest {
       max-width: 600px;
       margin: 0px auto;
       background-color: rgba(255,255,255,1);
@@ -84,7 +84,7 @@
     <div id="tokensForOwner"> No tokens yet. </div>
 
     <h2>Tokens on Sale</h2>
-    <div id="tokensForSale"> No tokens yet. </div>
+    <div id="tokensForSale"> No tokens are listed for sale yet. </div>
 
     <div id="set-token-price" style="display:none">
       <h2>Contract Owner Actions</h2>
@@ -108,11 +108,20 @@
     </div>
   </div>
 
+
+  <div id="guest" class="card" style="display:none">
+    <h2>Please install MetaMask to use this app.</h2>
+
+    <h3>Tokens on Sale</h3>
+    <div id="tokensForSale2"> No tokens are listed for sale yet. </div>
+  </div>
+
   <div id="error" class="card" style="display:none"></div>
 
   <script>
     'use strict'
 
+    const INFURA_NODE = '{{{INFURA_NODE}}}'
     const abi = {{{abi}}}
     const contractNetwork = '{{{contractNetwork}}}'
     const contractAddress = '{{{contractAddress}}}'

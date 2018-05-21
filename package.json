@@ -15,10 +15,10 @@
     "ethereumjs-tx": "^1.3.4",
     "ethjs-unit": "^0.1.6",
     "express": "^4.16.3",
-    "helmet": "^3.12.0",
-    "mustache-express": "^1.2.5",
+    "helmet": "^3.12.1",
+    "mustache-express": "^1.2.6",
     "node-fetch": "^2.1.2",
-    "solc": "^0.4.23",
+    "solc": "^0.4.24",
     "truffle-flattener": "^1.2.5",
     "truffle-hdwallet-provider": "0.0.3",
     "truffle-hdwallet-provider-privkey": "^0.1.0",
@@ -43,7 +43,7 @@
   },
   "homepage": "https://github.com/TimeWalkOrg/ethereum-token-contract#readme",
   "devDependencies": {
-    "nodemon": "^1.17.3",
+    "nodemon": "^1.17.4",
     "watchify": "^3.11.0"
   }
 }
