@@ -16,6 +16,7 @@
     "ethjs-unit": "^0.1.6",
     "express": "^4.16.3",
     "helmet": "^3.12.1",
+    "is-touch": "^1.1.0",
     "mustache-express": "^1.2.6",
     "node-fetch": "^2.1.2",
     "solc": "^0.4.24",

@@ -15,6 +15,10 @@
       padding: 40px;
     }
 
+    h2 {
+      text-align: center;
+    }
+
     .search {
       box-sizing: border-box;
       display: grid;
@@ -71,6 +75,20 @@
       height: 40px;
     }
 
+    .image-appstore {
+      max-width: 100px;
+    }
+
+    img {
+      transition-duration: 0.2s;
+      box-shadow: 0 6px 6px -3px rgba(0,0,0,.2), 0 10px 14px 1px rgba(0,0,0,.14), 0 4px 18px 3px rgba(0,0,0,.12);
+    }
+
+    img:hover {
+      box-shadow: 0 8px 10px -5px rgba(0,0,0,.2), 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12);
+      filter: brightness(120%);
+    }
+
     @media only screen and (max-width: 580px) {
       body {
         padding: 4px;
@@ -94,6 +112,10 @@
 
       #place,#register,#result {
         grid-column: 1 / span 2;
+      }
+
+      #guest {
+        text-align: center;
       }
     }
 
@@ -143,7 +165,19 @@
 
 
   <div id="guest" class="card" style="display:none">
-    <h2>Please install MetaMask to use this app.</h2>
+    <h2>land.timewalk.org is a dApp.</h2>
+
+    <div id="metamask-browser" style="display:none; justify-content: space-around; align-items: center">
+      Please install metamask to participate:
+      <a href="https://metamask.io">
+        <img src="metamask2.png" alt="metamask" style="width: 200px"/>
+      </a>
+    </div>
+
+    <div id="trust-browser" style="display:none; justify-content: space-around; align-items: center">
+      <a href="https://itunes.apple.com/us/app/trust-ethereum-wallet/id1288339409" target="_blank"><img src="https://uploads-ssl.webflow.com/5a88babea6e0f90001b39b0d/5a8a2aec54ea7a0001465579_badge-download-on-the-app-store.svg" class="image-appstore"></a>
+      <a href="https://play.google.com/store/apps/details?id=com.wallet.crypto.trustapp" target="_blank"><img src="https://uploads-ssl.webflow.com/5a88babea6e0f90001b39b0d/5a8a2aa037147b0001ae259d_google_play.png" class="image-appstore"></a>
+    </div>
 
     <h3>Tokens on Sale</h3>
     <div id="tokensForSale2"> No tokens are listed for sale yet. </div>

@@ -1,6 +1,7 @@
 'use strict'
 
 const bigInt          = require('big-integer')
+const isTouch         = require('is-touch')
 const Web3            = require('web3')
 const truffleContract = require('truffle-contract')
 
@@ -19,6 +20,10 @@ window.addEventListener('load', async () => {
         app = await setupApp(web3js, true)
 
         document.getElementById('guest').style.display = ''
+        if(isTouch)
+          document.getElementById('trust-browser').style.display = ''
+        else
+          document.getElementById('metamask-browser').style.display = ''
         document.getElementById('main').style.display = 'none'
         document.getElementById('error').style.display = 'none'
       } else {
