@@ -48,7 +48,7 @@ window.addEventListener('load', async () => {
 async function ownedTokensComponent(web3js, contract, marketplace, tokenIds, tokensForSale) {
   const addr = web3js.eth.accounts[0]
 
-  const yourTokens = tokensForSale.filter((tokenId) => { token.seller === addr })
+  const yourTokens = tokensForSale.filter((token) => { token.seller === addr })
 
   if(tokenIds.length || yourTokens.length)
     document.getElementById('tokensForOwner').innerHTML = ''
