@@ -44,7 +44,7 @@
   },
   "homepage": "https://github.com/TimeWalkOrg/land.timewalk.org#readme",
   "devDependencies": {
-    "nodemon": "^1.17.4",
+    "nodemon": "^1.17.5",
     "watchify": "^3.11.0"
   }
 }

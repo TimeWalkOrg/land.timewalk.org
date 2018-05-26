@@ -14,10 +14,11 @@ window.addEventListener('load', async () => {
     if(!result)
       return
 
-    if(!result.account) {
-      if (web3js.currentProvider.host === INFURA_NODE) {
+    window.isInfuraNode = web3js.currentProvider.host === INFURA_NODE
 
-        app = await setupApp(web3js, true)
+    if(!result.account) {
+      if (isInfuraNode) {
+        app = await setupApp(web3js)
 
         document.getElementById('guest').style.display = ''
         if(isTouch)
@@ -33,7 +34,7 @@ window.addEventListener('load', async () => {
       displayErrorPage('This contract runs on the ethereum network:' + contractNetwork + '. Please switch to that.')
     } else {
       if(!app)
-        app = await setupApp(web3js, false)
+        app = await setupApp(web3js)
 
       document.getElementById('main').style.display = ''
       document.getElementById('guest').style.display = 'none'
@@ -61,7 +62,7 @@ async function ownedTokensComponent(web3js, contract, marketplace, tokenIds, tok
     if(token.seller !== addr)
       return
 
-    const li = await tokenForSaleComponent(web3js, contract, marketplace, token, true)
+    const li = await tokenForSaleComponent(web3js, contract, marketplace, token)
 
     ul.appendChild(li)
   })
@@ -134,8 +135,8 @@ async function ownedTokenComponent(web3js, contract, tokenId) {
 
 
 // create a UI component that shows all tokens for sale by owner
-function tokensForSaleComponent(web3js, contract, marketplace, tokensForSale, isInfura) {
-  const addr = isInfura ? '0x0' : web3js.eth.accounts[0]
+function tokensForSaleComponent(web3js, contract, marketplace, tokensForSale) {
+  const addr = isInfuraNode ? '0x0' : web3js.eth.accounts[0]
 
   if(tokensForSale.length)
     document.getElementById('tokensForSale').innerHTML = ''
@@ -147,7 +148,7 @@ function tokensForSaleComponent(web3js, contract, marketplace, tokensForSale, is
     if(token.seller === addr)
       return
 
-    const li = await tokenForSaleComponent(web3js, contract, marketplace, token, true)
+    const li = await tokenForSaleComponent(web3js, contract, marketplace, token)
     ulSale.appendChild(li)
   })
 
@@ -156,8 +157,8 @@ function tokensForSaleComponent(web3js, contract, marketplace, tokensForSale, is
 
 
 // create a UI component for selling one token
-async function tokenForSaleComponent(web3js, contract, marketplace, token, isInfura) {
-  const addr = isInfura ? '0x0' : web3js.eth.accounts[0]
+async function tokenForSaleComponent(web3js, contract, marketplace, token) {
+  const addr = isInfuraNode ? '0x0' : web3js.eth.accounts[0]
 
   const li = document.createElement('li')
   li.style.padding = '0px 0px 10px 0px'
@@ -199,7 +200,7 @@ async function tokenForSaleComponent(web3js, contract, marketplace, token, isInf
 
       console.log(tx)
     })
-  } else if(!isInfura) {
+  } else if(!isInfuraNode) {
     // you can only buy tokens you don't own
     const btn = document.createElement('button')
     btn.classList.add('buysell')
@@ -335,7 +336,7 @@ async function setTokenPriceComponent(web3js, contract) {
 }
 
 
-async function setupApp(web3js, isInfura) {
+async function setupApp(web3js) {
   const tokenContract = truffleContract(abi)
   const marketplaceContract = truffleContract(marketplaceAbi)
 
@@ -347,7 +348,7 @@ async function setupApp(web3js, isInfura) {
 
   const addr = web3js.eth.accounts[0]
 
-  if (!isInfura) {
+  if (!isInfuraNode) {
     let tokenIds = await listTokensForOwner(contract, addr)
 
     await ownerWalletComponent(web3js, contract, addr)
@@ -373,7 +374,7 @@ async function setupApp(web3js, isInfura) {
     if(tokensForSale.length)
       document.getElementById('tokensForSale2').innerText = ''
 
-    const ulSale = tokensForSaleComponent(web3js, contract, marketplace, tokensForSale, true)
+    const ulSale = tokensForSaleComponent(web3js, contract, marketplace, tokensForSale)
     document.getElementById('tokensForSale2').appendChild(ulSale)
   }
 
