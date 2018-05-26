@@ -48,24 +48,22 @@ window.addEventListener('load', async () => {
 async function ownedTokensComponent(web3js, contract, marketplace, tokenIds, tokensForSale) {
   const addr = web3js.eth.accounts[0]
 
-  if(tokenIds.length || tokensForSale.length)
+  const yourTokens = tokensForSale.filter((tokenId) => { token.seller === addr })
+
+  if(tokenIds.length || yourTokens.length)
     document.getElementById('tokensForOwner').innerHTML = ''
 
   const ul = document.createElement('ul')
 
-  tokenIds.forEach(async (tokenId, i) => {
+  for(let tokenId of tokenIds) {
     const li = await ownedTokenComponent(web3js, contract, tokenId)
     ul.appendChild(li)
-  })
+  }
 
-  tokensForSale.forEach(async token => {
-    if(token.seller !== addr)
-      return
-
+  for(let token of yourTokens) {
     const li = await tokenForSaleComponent(web3js, contract, marketplace, token)
-
     ul.appendChild(li)
-  })
+  }
 
   return ul
 }
