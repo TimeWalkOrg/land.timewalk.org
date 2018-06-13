@@ -8,9 +8,9 @@
     "test": "test"
   },
   "dependencies": {
-    "big-integer": "^1.6.28",
+    "big-integer": "^1.6.31",
     "cryptocompare": "^0.5.0",
-    "dotenv": "^5.0.1",
+    "dotenv": "^6.0.0",
     "erc821": "^3.2.4",
     "ethereumjs-tx": "^1.3.4",
     "ethjs-unit": "^0.1.6",
